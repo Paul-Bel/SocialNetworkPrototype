@@ -1,9 +1,22 @@
-
-.header img {
-    width: 60px;
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
 }
 
-.header {
-    grid-area: h;
-    background-color: papayawhip;
+.active {
+
 }
+
+.itemDialogs {
+    padding: 15px;
+}
+
+.itemDialogs .active {
+    color: brown;
+    text-decoration: none;
+}
+
+.messages {
+    padding: 15px;
+}
+

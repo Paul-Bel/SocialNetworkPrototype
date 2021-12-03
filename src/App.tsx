@@ -1,26 +1,65 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Header} from "./components/Header/Header";
+import {Navbar} from "./components/Navbar/Navbar";
+import {Profile} from "./components/Profile/Profile";
+import {Dialogs} from "./components/Dialogs/Dialogs";
+import {News} from "./components/News/News";
+import {Settings} from "./components/Settings/Settings";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Music} from "./components/Music/Music";
+import {addMyPost} from "./components/Redax/State";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+type PostType = {
+    id: number,
+    message: string,
+    likescounte: number,
+}
+type DialogNickType = {id: number, name: string}
+type MessageType = {id: number, message: string}
+type DataType = {
+    profilePage:{ post: PostType[]} ,
+    dialogNick: DialogNickType[],
+    messages: MessageType[],
+}
+
+type AppDataType = {
+    data: DataType
+    addMyPost: (Text: string) => void
+}
+
+const App = (props: AppDataType) => {
+
+    return (
+        <BrowserRouter>
+            <div className='app-wrapper'>
+                <Header/>
+                <Navbar/>
+                <div className={'app-wrapper-content'}>
+                    <Routes>
+                        <Route path='/profile'
+                               element={<Profile profilePage={props.data.profilePage} addMyPost={props.addMyPost}/>}/>
+
+                        <Route path='/dialogs'
+                               element={<Dialogs dialogNick={props.data.dialogNick}
+                                                 messages={props.data.messages}/>}>
+                            <Route path='/dialogs:id'
+                                   element={<Dialogs dialogNick={props.data.dialogNick}
+                                                     messages={props.data.messages}/>}/>
+                        </Route>
+
+                        <Route path='/news' element={<News/>}/>
+                        <Route path='/settings' element={<Settings/>}/>
+                        <Route path='/music' element={<Music/>}/>
+                    </Routes>
+                </div>
+
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;
+
+
+// <Route path="profile" element={<Profile/>}/>

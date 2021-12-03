@@ -10,7 +10,7 @@ export const Navbar = () => {
                 <NavLink to={"/profile/"} className={s.activLink}>Profile</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink exact to={"/dialogs/"} className={s.activLink}>Messages</NavLink>
+                <NavLink to={"/dialogs/"} className={s.activLink}>Messages</NavLink>
             </div>
             <div className={s.item}>
                 <NavLink to={"/news/"} className={s.activLink}>News</NavLink>
