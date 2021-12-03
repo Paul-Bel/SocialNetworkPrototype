@@ -22,7 +22,10 @@ export const MyPosts = (props: ProfilePropsType) => {
     let addPost = () => {
         if (NewPost.current) {
             let Text = NewPost.current.value;
-            props.addMyPost(Text)
+            if (Text.trim()){props.addMyPost(Text.trim())
+                NewPost.current.value = ''
+            }
+            else return
         }
         // if(newText.trim()){setText(newText.trim())}else{return alert('ERRORRR')}
         // setText('')
