@@ -1,21 +1,30 @@
 import React from 'react';
 import p from './Profile.module.css';
-import {MyPosts} from "./MyPosts/MyPosts";
 import '../../App.css'
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {MyPosts} from "./MyPosts/MyPosts";
 
-// type MyPostsProps = {
-//     id: number,
-//     message: string,
-//     likescounte: number,
-// }
 
-export const Profile = (props) => {
+type PostType = {
+    id: number,
+    message: string,
+    likescounte: number,
+}
+
+type ProfilePropsType = {
+    profilePage:{ post: PostType[]}
+    addMyPost: (Text: string) => void
+}
+
+export const Profile = (props: ProfilePropsType) => {
+
     return (
         <div className={p.content}>
             <ProfileInfo/>
-
-            <MyPosts/>
+            <MyPosts
+                profilePage={props.profilePage}
+                addMyPost={props.addMyPost}
+            />
         </div>
     );
 }

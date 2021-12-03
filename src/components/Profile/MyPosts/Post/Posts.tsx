@@ -1,7 +1,13 @@
 import React from 'react';
 import p from './Posts.module.css';
 
-export const Posts = (props) => {
+type MyPostsMessage = {
+    message: string,
+    likescounte: number,
+}
+
+
+export const Posts = (props: MyPostsMessage) => {
     return (
         <div className={p.post}>
             <div className={p.item}>
