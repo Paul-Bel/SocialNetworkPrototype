@@ -1,11 +1,10 @@
-.content img {
-    width:600px;
-}
+
 
 .content {
     grid-area: c;
+    background-color: yellowgreen;
 }
 
-/*.item {*/
-
-/*}*/
+.item {
+    color: ;
+}

@@ -1,3 +1,11 @@
-.info {
-    padding: 10px;
+.content img {
+    width:600px;
 }
+
+.content {
+    grid-area: c;
+}
+
+/*.item {*/
+
+/*}*/

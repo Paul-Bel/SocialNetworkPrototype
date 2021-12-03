@@ -1,19 +1,10 @@
+
+
 .nav {
     grid-area: n;
-    background-color: darkblue;
-    padding: 10%;
-    height: ;
+    background-color: dodgerblue;
 }
 
 .item {
     color: white;
-}
-.activLink {
-    display: block;
-    color: white;
-    text-decoration: none;
-    /*padding: 15px;*/
-}
-.item a.activLink {
-    color: yellowgreen;
 }
