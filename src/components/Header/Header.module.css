@@ -1,0 +1,9 @@
+
+.header img {
+    width: 60px;
+}
+
+.header {
+    grid-area: h;
+    background-color: papayawhip;
+}
