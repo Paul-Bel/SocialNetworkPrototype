@@ -10,7 +10,7 @@ type messagePost = {
     messages: MessageType[],
 }
 
-export const Dialogs = (props: messagePost) => {
+export const Dialogs: React.FC<messagePost> = (props) => {
 
     const dialogsElements = () => {
          return (props.dialogNick.map(d => <DialogItem name={d.name} id={d.id}/>)
