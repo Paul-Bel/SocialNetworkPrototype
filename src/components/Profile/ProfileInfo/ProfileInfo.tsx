@@ -3,6 +3,9 @@ import s from './ProfileInfo.module.css'
 
 export const ProfileInfo = () => {
 
+    //add story
+
+
     return (
         <div>
             <img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Istanbul_IMG_7257_1725.jpg"
