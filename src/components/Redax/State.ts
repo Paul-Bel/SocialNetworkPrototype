@@ -3,12 +3,9 @@ import {renderEnteerTree} from "../../render";
 type PostType = {id: number, message: string, likescounte: number,}
 type DialogNickType = {id: number, name: string}
 type MessageType = {id: number, message: string}
-type postTypes = {post: Array<PostType>}
-type dialogsTypesss = {dialogNick: Array<DialogNickType>}
 
 type DataType = {
-    profilePage: { post: Array<{id: number, message: string, likescounte: number}> }
-    // profilePage: { post: PostType[]} ,
+    profilePage: { post: PostType[], newPostText: string}
     dialogNick: DialogNickType[],
     messages: MessageType[],
 }
@@ -18,7 +15,8 @@ export let data:DataType = {
         post: [
             {id: 1, message: "It's me. What are you doing?", likescounte: 5},
             {id: 2, message: "I'am learn", likescounte: 3},
-            {id: 3, message: "Good ivning!", likescounte: 15},]
+            {id: 3, message: "Good ivning!", likescounte: 15},],
+        newPostText: 'text',
     },
     dialogNick: [
     {id: 1, name: 'Anatoliy'},
