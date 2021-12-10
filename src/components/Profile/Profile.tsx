@@ -13,7 +13,7 @@ type PostType = {
 
 type ProfilePropsType = {
     profilePage:{ post: PostType[], newPostText: string}
-    addMyPost: (Text: string) => void
+    addMyPost: () => void
     changePost: (Text: string) => void
 }
 

@@ -25,7 +25,7 @@ type DataType = {
 
 type AppDataType = {
     data: DataType
-    addMyPost: (Text: string) => void
+    addMyPost: () => void
     changePost: (Text: string) => void
 }
 
