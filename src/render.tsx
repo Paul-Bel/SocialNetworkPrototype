@@ -12,7 +12,7 @@ type PostType = {
 type DialogNickType = {id: number, name: string}
 type MessageType = {id: number, message: string}
 type DataType = {
-    profilePage:{ post: PostType[]} ,
+    profilePage:{ post: PostType[], newPostText: string} ,
     dialogNick: DialogNickType[],
     messages: MessageType[],
 }

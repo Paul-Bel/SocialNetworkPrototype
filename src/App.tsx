@@ -8,7 +8,6 @@ import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Music} from "./components/Music/Music";
-import {addMyPost} from "./components/Redax/State";
 
 type PostType = {
     id: number,
@@ -17,8 +16,9 @@ type PostType = {
 }
 type DialogNickType = {id: number, name: string}
 type MessageType = {id: number, message: string}
+
 type DataType = {
-    profilePage:{ post: PostType[]} ,
+    profilePage:{ post: PostType[], newPostText: string} ,
     dialogNick: DialogNickType[],
     messages: MessageType[],
 }
@@ -36,9 +36,13 @@ const App = (props: AppDataType) => {
                 <Header/>
                 <Navbar/>
                 <div className={'app-wrapper-content'}>
+
                     <Routes>
                         <Route path='/profile'
-                               element={<Profile profilePage={props.data.profilePage} addMyPost={props.addMyPost}/>}/>
+                               element={<Profile
+                                   profilePage={props.data.profilePage}
+                                   addMyPost={props.addMyPost}
+                               />}/>
 
                         <Route path='/dialogs'
                                element={<Dialogs dialogNick={props.data.dialogNick}
@@ -52,6 +56,7 @@ const App = (props: AppDataType) => {
                         <Route path='/settings' element={<Settings/>}/>
                         <Route path='/music' element={<Music/>}/>
                     </Routes>
+
                 </div>
 
             </div>
