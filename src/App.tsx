@@ -26,6 +26,7 @@ type DataType = {
 type AppDataType = {
     data: DataType
     addMyPost: (Text: string) => void
+    changePost: (Text: string) => void
 }
 
 const App = (props: AppDataType) => {
@@ -42,6 +43,7 @@ const App = (props: AppDataType) => {
                                element={<Profile
                                    profilePage={props.data.profilePage}
                                    addMyPost={props.addMyPost}
+                                   changePost={props.changePost}
                                />}/>
 
                         <Route path='/dialogs'

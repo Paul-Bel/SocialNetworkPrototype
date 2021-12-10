@@ -31,9 +31,13 @@ export let data:DataType = {
     ]
 }
 
-export const addMyPost = (Text: string) => {
-    let addNewPost = {id: 4, message: Text, likescounte: 0}
+export const addMyPost = () => {
+    let addNewPost = {id: 4, message: data.profilePage.newPostText, likescounte: 0}
     data.profilePage.post.push(addNewPost)
+    renderEnteerTree(data);
+}
+export const changePost = (Text: string) => {
+data.profilePage.newPostText = Text
     renderEnteerTree(data);
 }
 

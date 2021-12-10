@@ -11,6 +11,7 @@ type PostType = {
 type ProfilePropsType = {
     profilePage:{ post: PostType[], newPostText: string}
     addMyPost: (Text: string)=> void
+    changePost: (Text: string)=> void
 }
 
 export const MyPosts = (props: ProfilePropsType) => {
@@ -26,6 +27,10 @@ export const MyPosts = (props: ProfilePropsType) => {
             else return
         }
     }
+const changeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.changePost(e.currentTarget.value)
+}
+
 
     return (<div>
             <h3>My post</h3>
@@ -33,7 +38,7 @@ export const MyPosts = (props: ProfilePropsType) => {
                 <textarea
                     ref={NewPost}
                     value={props.profilePage.newPostText}
-                    // onChange={addText}
+                    onChange={changeText}
                 > </textarea>
                 <div>
                     <button onClick={addPost}>Add post</button>

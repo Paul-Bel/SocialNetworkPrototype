@@ -2,17 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {addMyPost} from "./components/Redax/State";
+import {addMyPost, changePost} from "./components/Redax/State";
 
 type PostType = {
     id: number,
     message: string,
     likescounte: number,
 }
-type DialogNickType = {id: number, name: string}
-type MessageType = {id: number, message: string}
+type DialogNickType = { id: number, name: string }
+type MessageType = { id: number, message: string }
 type DataType = {
-    profilePage:{ post: PostType[], newPostText: string} ,
+    profilePage: { post: PostType[], newPostText: string },
     dialogNick: DialogNickType[],
     messages: MessageType[],
 }
@@ -20,11 +20,13 @@ type renderType = {
     data: DataType
 }
 
-export const renderEnteerTree = (data: DataType) =>{
+export const renderEnteerTree = (data: DataType) => {
     ReactDOM.render(
         <App
             data={data}
-            addMyPost={addMyPost}/>,
+            addMyPost={addMyPost}
+            changePost={changePost}
+        />,
 
         document.getElementById('root')
     );

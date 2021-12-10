@@ -14,6 +14,7 @@ type PostType = {
 type ProfilePropsType = {
     profilePage:{ post: PostType[], newPostText: string}
     addMyPost: (Text: string) => void
+    changePost: (Text: string) => void
 }
 
 export const Profile = (props: ProfilePropsType) => {
@@ -24,7 +25,7 @@ export const Profile = (props: ProfilePropsType) => {
             <MyPosts
                 profilePage={props.profilePage}
                 addMyPost={props.addMyPost}
-
+                changePost={props.changePost}
             />
         </div>
     );
