@@ -3,7 +3,6 @@ import {renderEnteerTree} from "../../render";
 type PostType = {id: number, message: string, likescounte: number,}
 type DialogNickType = {id: number, name: string}
 type MessageType = {id: number, message: string}
-
 type DataType = {
     profilePage: { post: PostType[], newPostText: string}
     dialogNick: DialogNickType[],
