@@ -49,6 +49,3 @@ data.profilePage.newPostText = Text
     rerenderEntreerTree(data);
 }
 
-export const subscribe = (f: any) => {
-    rerenderEntreerTree = f
-}
