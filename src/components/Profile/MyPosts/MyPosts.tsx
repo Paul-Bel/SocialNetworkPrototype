@@ -18,10 +18,21 @@ export const MyPosts = (props: ProfilePropsType) => {
 
     const postElement = props.profilePage.post.map(p => <Posts message={p.message} likescounte={p.likescounte}/>)
     let NewPost = React.createRef<HTMLTextAreaElement>()
-    let addPost = () => {props.addMyPost()}
+    let addPost = () => {
+        props.addMyPost()
+        // if (NewPost.current) {
+            // let Text = NewPost.current.value;
+            // if (Text.trim()){props.addMyPost(Text.trim())
+                // NewPost.current.value = ''
+        //     }
+        //     else return
+        // }
+    }
 const changeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.changePost(e.currentTarget.value)
 }
+
+
     return (<div>
             <h3>My post</h3>
             <div className={p.addText}>
@@ -29,7 +40,7 @@ const changeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
                     ref={NewPost}
                     value={props.profilePage.newPostText}
                     onChange={changeText}
-                />
+                > </textarea>
                 <div>
                     <button onClick={addPost}>Add post</button>
                 </div>

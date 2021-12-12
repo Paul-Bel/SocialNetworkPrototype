@@ -1,4 +1,6 @@
-import {renderEnteerTree} from "../../render";
+let rerenderEntreerTree = (data: DataType) => {
+    console.log('fffffffff')
+}
 
 type PostType = {id: number, message: string, likescounte: number,}
 type DialogNickType = {id: number, name: string}
@@ -32,6 +34,7 @@ export let data:DataType = {
 }
 
 export const addMyPost = () => {
+
     let addNewPost = {
         id: 4,
         message: data.profilePage.newPostText.trim(),
@@ -39,10 +42,13 @@ export const addMyPost = () => {
     }
     data.profilePage.post.push(addNewPost)
     data.profilePage.newPostText = ''
-    renderEnteerTree(data);
+    rerenderEntreerTree(data);
 }
 export const changePost = (Text: string) => {
 data.profilePage.newPostText = Text
-    renderEnteerTree(data);
+    rerenderEntreerTree(data);
 }
 
+export const subscribe = (f: any) => {
+    rerenderEntreerTree = f
+}
