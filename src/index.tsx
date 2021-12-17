@@ -29,6 +29,8 @@ export const renderEnteerTree = (data: DataType) => {
         document.getElementById('root')
     );
 }
+
+
 renderEnteerTree(data)
 subscribe(renderEnteerTree)
 
