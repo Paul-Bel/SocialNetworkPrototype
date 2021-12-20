@@ -1,5 +1,5 @@
-let rerenderEntreerTree = (data: DataType) => {
-    console.log('fffffffff')
+let store = {
+
 }
 
 type PostType = {id: number, message: string, likescounte: number,}
@@ -11,7 +11,7 @@ type DataType = {
     messages: MessageType[],
 }
 
-export let data:DataType = {
+export let state:DataType = {
     profilePage: {
         post: [
             {id: 1, message: "It's me. What are you doing?", likescounte: 5},
@@ -37,15 +37,15 @@ export const addMyPost = () => {
 
     let addNewPost = {
         id: 4,
-        message: data.profilePage.newPostText.trim(),
+        message: state.profilePage.newPostText.trim(),
         likescounte: 0
     }
-    data.profilePage.post.push(addNewPost)
-    data.profilePage.newPostText = ''
-    rerenderEntreerTree(data);
+    state.profilePage.post.push(addNewPost)
+    state.profilePage.newPostText = ''
+   ;
 }
 export const changePost = (Text: string) => {
-data.profilePage.newPostText = Text
-    rerenderEntreerTree(data);
+state.profilePage.newPostText = Text
+    ;
 }
 
