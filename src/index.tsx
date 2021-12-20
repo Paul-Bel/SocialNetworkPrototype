@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {addMyPost, changePost, data} from "./components/Redax/State";
+import {addMyPost, changePost, state} from "./components/Redax/State";
 
 type PostType = {
     id: number,
@@ -31,7 +31,7 @@ export const renderEnteerTree = (data: DataType) => {
 }
 
 
-renderEnteerTree(data)
+renderEnteerTree(state)
 // subscribe(renderEnteerTree)
 
 
