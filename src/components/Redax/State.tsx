@@ -8,7 +8,7 @@ const changeDialogPost = 'changeDialogPost'
 const addDialogPost = 'addDialogPost'
 
 export type TYPE_DISPATCH_CREATOR = string
-    // 'changePost' | 'addPost' | 'changeDialogPost' | 'addDialogPost'
+// 'changePost' | 'addPost' | 'changeDialogPost' | 'addDialogPost'
 type PostType = { id: number, message: string, likescounte: number, }
 type DialogNickType = { id: number, name: string }
 type MessageType = { id: number, message: string }
@@ -26,21 +26,22 @@ type ActionPropsType = {
     value?: string
 }
 export const addPostActionCreator = () => ({type: addPost})
-export const changePostActionCreator = (value: string) =>{
-   return ({type: changePost, value})}
+export const changePostActionCreator = (value: string) => {
+    return ({type: changePost, value})
+}
 export const addDialogCreator = () => ({type: addDialogPost})
 export const changeDialogsPost = (value: string) => {
-   return  ({type: changeDialogPost, value})
+    return ({type: changeDialogPost, value})
 }
-type newPostText =  string
+type newPostText = string
 export let store = {
-    _state:  {
-        profilePage:  {
-            post:  [
+    _state: {
+        profilePage: {
+            post: [
                 {id: 1, message: "It's me. What are you doing?", likescounte: 5},
                 {id: 2, message: "I'am learn", likescounte: 13},
             ],
-            newPostText:  'text',
+            newPostText: 'text',
         },
         dialogNick: [
             {id: 1, name: 'Anatoliy'},
@@ -64,7 +65,7 @@ export let store = {
     dispatch(action: ActionPropsType) {
         profileReducer(action, this.getState())
         dialogsReducer(action, this.getState())
-            this._callSubscrible(this._state)
+        this._callSubscrible(this._state)
 
     },
     getState() {
@@ -76,7 +77,6 @@ export let store = {
     },
 
 }
-
 
 
 export default store;
