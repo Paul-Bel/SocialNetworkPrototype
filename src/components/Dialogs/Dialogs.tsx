@@ -33,13 +33,14 @@ export const Dialogs: React.FC<messagePost> = (props) => {
             </div>
             <div className={p.messages}>
                 {messagesElement}
-            </div>
-            <div>
+            {/*</div>*/}
+            {/*<div>*/}
                 <div>
                     <textarea
                         value={props.messageBody}
                         onChange={onChangeHandler}
-                    /></div>
+                    />
+                </div>
                 <div>
                     <button
                     onClick={addPost}
