@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {addMyPost, changePost, state} from "./components/Redax/State";
+import {store} from "./components/Redax/State";
 
 type PostType = {
     id: number,
@@ -15,6 +15,7 @@ type DataType = {
     profilePage: { post: PostType[], newPostText: string },
     dialogNick: DialogNickType[],
     messages: MessageType[],
+    messageBody: string
 }
 
 
@@ -22,8 +23,7 @@ export const renderEnteerTree = (data: DataType) => {
     ReactDOM.render(
         <App
             data={data}
-            addMyPost={addMyPost}
-            changePost={changePost}
+            dispatch={store.dispatch.bind(store)}
         />,
 
         document.getElementById('root')
@@ -31,8 +31,8 @@ export const renderEnteerTree = (data: DataType) => {
 }
 
 
-renderEnteerTree(state)
-// subscribe(renderEnteerTree)
+renderEnteerTree(store.getState())
+// store.subscribe(renderEnteerTree)
 
 
 

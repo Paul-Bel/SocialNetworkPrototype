@@ -3,6 +3,7 @@ import p from './Profile.module.css';
 import '../../App.css'
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPosts} from "./MyPosts/MyPosts";
+import {TYPE_DISPATCH_CREATOR} from "../Redax/State";
 
 
 type PostType = {
@@ -10,11 +11,13 @@ type PostType = {
     message: string,
     likescounte: number,
 }
-
+type ActionPropsType = {
+    type: TYPE_DISPATCH_CREATOR,
+    value?: string
+}
 type ProfilePropsType = {
     profilePage:{ post: PostType[], newPostText: string}
-    addMyPost: () => void
-    changePost: (Text: string) => void
+    dispatch: (action: ActionPropsType) => void
 }
 
 export const Profile = (props: ProfilePropsType) => {
@@ -24,8 +27,8 @@ export const Profile = (props: ProfilePropsType) => {
             <ProfileInfo/>
             <MyPosts
                 profilePage={props.profilePage}
-                addMyPost={props.addMyPost}
-                changePost={props.changePost}
+                dispatch={props.dispatch}
+
             />
         </div>
     );

@@ -1,51 +1,102 @@
-let store = {
+import {renderEnteerTree} from "../../index";
 
-}
+const addPost = 'addPost'
+const changePost = 'changePost'
+const changeDialogPost = 'changeDialogPost'
+const addDialogPost = 'addDialogPost'
 
-type PostType = {id: number, message: string, likescounte: number,}
-type DialogNickType = {id: number, name: string}
-type MessageType = {id: number, message: string}
+export type TYPE_DISPATCH_CREATOR = string
+    // 'changePost' | 'addPost' | 'changeDialogPost' | 'addDialogPost'
+type PostType = { id: number, message: string, likescounte: number, }
+type DialogNickType = { id: number, name: string }
+type MessageType = { id: number, message: string }
 type DataType = {
-    profilePage: { post: PostType[], newPostText: string}
+    profilePage: { post: PostType[], newPostText: string }
     dialogNick: DialogNickType[],
     messages: MessageType[],
+    messageBody: string
+}
+type ActionPropsType = {
+    type: TYPE_DISPATCH_CREATOR,
+    value?: string
 }
 
-export let state:DataType = {
-    profilePage: {
-        post: [
-            {id: 1, message: "It's me. What are you doing?", likescounte: 5},
-            {id: 2, message: "I'am learn", likescounte: 3},
-            {id: 3, message: "Good ivning!", likescounte: 15},],
-        newPostText: 'text',
+export const addPostActionCreator = () => ({type: addPost})
+export const changePostActionCreator = (value: string) =>{
+   return ({type: changePost, value})}
+export const addDialogCreator = () => ({type: addDialogPost})
+export const changeDialogsPost = (value: string) => {
+   return  ({type: changeDialogPost, value})
+}
+
+
+export let store = {
+    _state: {
+        profilePage: {
+            post: [
+                {id: 1, message: "It's me. What are you doing?", likescounte: 5},
+                {id: 2, message: "I'am learn", likescounte: 13},
+            ],
+            newPostText: 'text',
+        },
+        dialogNick: [
+            {id: 1, name: 'Anatoliy'},
+            {id: 2, name: 'Sergey'},
+            {id: 3, name: 'Sveta'},
+            {id: 4, name: 'Nikifor'},
+            {id: 5, name: 'Arsrniy'},
+        ],
+        messages: [
+            {id: 1, message: "Hello"},
+            {id: 2, message: "How are you?"},
+            {id: 3, message: "I`am learn to React"},
+        ],
+        messageBody: 'p',
     },
-    dialogNick: [
-    {id: 1, name: 'Anatoliy'},
-    {id: 2, name: 'Sergey'},
-    {id: 3, name: 'Sveta'},
-    {id: 4, name: 'Nikifor'},
-    {id: 5, name: 'Arsrniy'},
-],
-    messages: [
-        {id: 1, message: "Hello"},
-        {id: 2, message: "How are you?"},
-        {id: 3, message: "I`am learn to React"},
-    ]
+    _callSubscrible(state: DataType) {
+        renderEnteerTree(this._state)
+        console.log('State change')
+    },
+    dispatch(action: ActionPropsType) {
+        if (action.type === addPost) {
+            let addNewPost = {
+                id: 4,
+                message: this._state.profilePage.newPostText.trim(),
+                likescounte: 0
+            }
+            this._state.profilePage.post.push(addNewPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscrible(this._state)
+        } else if (action.type === changePost) {
+            if (action.value)
+                this._state.profilePage.newPostText = action.value
+            this._callSubscrible(this._state)
+        }else if (action.type === changeDialogPost){
+            if(action.value)
+            this._state.messageBody = action.value
+            this._callSubscrible(this._state)
+        }
+        else if (action.type === addDialogPost){
+            let newDialogPost = {id: 3, message: this._state.messageBody.trim()}
+            this._state.messages.push(newDialogPost)
+            this._callSubscrible(this._state)
+            this._state.messageBody = ''
+        }
+
+
+
+    },
+    getState() {
+        return this._state
+    },
+
+    subscribe() {
+        // this._renderEntireTree = observer
+    },
+
 }
 
-export const addMyPost = () => {
 
-    let addNewPost = {
-        id: 4,
-        message: state.profilePage.newPostText.trim(),
-        likescounte: 0
-    }
-    state.profilePage.post.push(addNewPost)
-    state.profilePage.newPostText = ''
-   ;
-}
-export const changePost = (Text: string) => {
-state.profilePage.newPostText = Text
-    ;
-}
+
+export default store;
 
