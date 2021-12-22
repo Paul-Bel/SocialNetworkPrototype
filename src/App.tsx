@@ -8,6 +8,7 @@ import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Music} from "./components/Music/Music";
+import {TYPE_DISPATCH_CREATOR} from "./components/Redax/State";
 
 type PostType = {
     id: number,
@@ -21,13 +22,19 @@ type DataType = {
     profilePage:{ post: PostType[], newPostText: string} ,
     dialogNick: DialogNickType[],
     messages: MessageType[],
+    messageBody: string
 }
 
+type ActionPropsType = {
+    type: TYPE_DISPATCH_CREATOR,
+    value?: string
+}
 type AppDataType = {
     data: DataType
-    addMyPost: () => void
-    changePost: (Text: string) => void
+    dispatch: (action: ActionPropsType) => void
 }
+
+
 
 const App = (props: AppDataType) => {
 
@@ -42,16 +49,22 @@ const App = (props: AppDataType) => {
                         <Route path='/profile'
                                element={<Profile
                                    profilePage={props.data.profilePage}
-                                   addMyPost={props.addMyPost}
-                                   changePost={props.changePost}
+                                   dispatch={props.dispatch}
                                />}/>
 
                         <Route path='/dialogs'
                                element={<Dialogs dialogNick={props.data.dialogNick}
-                                                 messages={props.data.messages}/>}>
+                                                 messages={props.data.messages}
+                                                 messageBody={props.data.messageBody}
+                                                 dispatch={props.dispatch}
+
+                               />}>
                             <Route path='/dialogs:id'
                                    element={<Dialogs dialogNick={props.data.dialogNick}
-                                                     messages={props.data.messages}/>}/>
+                                                     messages={props.data.messages}
+                                                     messageBody={props.data.messageBody}
+                                                     dispatch={props.dispatch}
+                                   />}/>
                         </Route>
 
                         <Route path='/news' element={<News/>}/>

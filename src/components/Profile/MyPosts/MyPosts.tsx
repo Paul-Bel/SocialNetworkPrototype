@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from 'react';
+import {addPostActionCreator, changePostActionCreator, TYPE_DISPATCH_CREATOR} from '../../Redax/State';
 import p from './MyPosts.module.css';
 import {Posts} from "./Post/Posts";
 
@@ -7,11 +8,13 @@ type PostType = {
     message: string,
     likescounte: number,
 }
-
+type ActionPropsType = {
+    type: TYPE_DISPATCH_CREATOR,
+    value?: string
+}
 type ProfilePropsType = {
-    profilePage:{ post: PostType[], newPostText: string}
-    addMyPost: ()=> void
-    changePost: (Text: string)=> void
+    profilePage: { post: PostType[], newPostText: string }
+    dispatch: (action: ActionPropsType) => void
 }
 
 export const MyPosts = (props: ProfilePropsType) => {
@@ -19,18 +22,13 @@ export const MyPosts = (props: ProfilePropsType) => {
     const postElement = props.profilePage.post.map(p => <Posts message={p.message} likescounte={p.likescounte}/>)
     let NewPost = React.createRef<HTMLTextAreaElement>()
     let addPost = () => {
-        props.addMyPost()
-        // if (NewPost.current) {
-            // let Text = NewPost.current.value;
-            // if (Text.trim()){props.addMyPost(Text.trim())
-                // NewPost.current.value = ''
-        //     }
-        //     else return
-        // }
+        props.dispatch(addPostActionCreator())
+
     }
-const changeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.changePost(e.currentTarget.value)
-}
+    const changeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(changePostActionCreator(e.currentTarget.value))
+
+    }
 
 
     return (<div>
