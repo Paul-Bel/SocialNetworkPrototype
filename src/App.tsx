@@ -8,29 +8,28 @@ import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Music} from "./components/Music/Music";
-import {TYPE_DISPATCH_CREATOR} from "./components/Redax/State";
+import {TYPE_DISPATCH_CREATOR} from "./components/Redux/Store";
 
-type PostType = {
-    id: number,
-    message: string,
-    likescounte: number,
+type PostType = { id: number, message: string, likescounte: number }
+type profilePageType = { post: Array<PostType>, newPostText: string }
+type dialogType = { id: number, name: string }
+type dialogNickType = Array<dialogType>
+type messageType = { id: number, message: string }
+type messagesType = Array<messageType>
+type dialogsPagesType = { dialogNick: dialogNickType, messages: messagesType, messageBody: string }
+type siteBarType = { id: number }
+
+export type stateType = {
+    profilePage: profilePageType
+    dialogsPages: dialogsPagesType
+    siteBar: siteBarType
 }
-type DialogNickType = {id: number, name: string}
-type MessageType = {id: number, message: string}
-
-type DataType = {
-    profilePage:{ post: PostType[], newPostText: string} ,
-    dialogNick: DialogNickType[],
-    messages: MessageType[],
-    messageBody: string
-}
-
 type ActionPropsType = {
     type: TYPE_DISPATCH_CREATOR,
     value?: string
 }
 type AppDataType = {
-    data: DataType
+    data: stateType
     dispatch: (action: ActionPropsType) => void
 }
 
@@ -53,16 +52,16 @@ const App = (props: AppDataType) => {
                                />}/>
 
                         <Route path='/dialogs'
-                               element={<Dialogs dialogNick={props.data.dialogNick}
-                                                 messages={props.data.messages}
-                                                 messageBody={props.data.messageBody}
+                               element={<Dialogs dialogNick={props.data.dialogsPages.dialogNick}
+                                                 messages={props.data.dialogsPages.messages}
+                                                 messageBody={props.data.dialogsPages.messageBody}
                                                  dispatch={props.dispatch}
 
                                />}>
                             <Route path='/dialogs:id'
-                                   element={<Dialogs dialogNick={props.data.dialogNick}
-                                                     messages={props.data.messages}
-                                                     messageBody={props.data.messageBody}
+                                   element={<Dialogs dialogNick={props.data.dialogsPages.dialogNick}
+                                                     messages={props.data.dialogsPages.messages}
+                                                     messageBody={props.data.dialogsPages.messageBody}
                                                      dispatch={props.dispatch}
                                    />}/>
                         </Route>

@@ -2,24 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {store} from "./components/Redax/State";
+import {store} from "./components/Redux/Store";
 
-type PostType = {
-    id: number,
-    message: string,
-    likescounte: number,
+type PostType = { id: number, message: string, likescounte: number }
+type profilePageType = { post: Array<PostType>, newPostText: string }
+type dialogType = { id: number, name: string }
+type dialogNickType = Array<dialogType>
+type messageType = { id: number, message: string }
+type messagesType = Array<messageType>
+type dialogsPagesType = { dialogNick: dialogNickType, messages: messagesType, messageBody: string }
+type siteBarType = { id: number }
+
+export type stateType = {
+    profilePage: profilePageType
+    dialogsPages: dialogsPagesType
+    siteBar: siteBarType
 }
-type DialogNickType = { id: number, name: string }
-type MessageType = { id: number, message: string }
-type DataType = {
-    profilePage: { post: PostType[], newPostText: string },
-    dialogNick: DialogNickType[],
-    messages: MessageType[],
-    messageBody: string
-}
 
 
-export const renderEnteerTree = (data: DataType) => {
+export const renderEnteerTree = (data: stateType) => {
     ReactDOM.render(
         <App
             data={data}
