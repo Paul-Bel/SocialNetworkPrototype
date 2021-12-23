@@ -1,7 +1,7 @@
 import React from "react";
-import {TYPE_DISPATCH_CREATOR} from "./State";
 
-
+export type TYPE_DISPATCH_CREATOR = string
+// 'changePost' | 'addPost' | 'changeDialogPost' | 'addDialogPost'
 type ActionPropsType = {
     type: TYPE_DISPATCH_CREATOR,
     value?: string
@@ -16,10 +16,15 @@ type DataType = {
     messageBody: string
     sidebar: {}
 }
+
 const addPost = 'addPost'
 const changePost = 'changePost'
+export const addPostActionCreator = () => ({type: addPost})
+export const changePostActionCreator = (value: string) => {
+    return ({type: changePost, value})
+}
 
-const profileReducer = (action: ActionPropsType, state: DataType) => {
+const profileReducer = (action: ActionPropsType, state: any) => {
     switch (action.type) {
         case changePost:
             if (action.value)

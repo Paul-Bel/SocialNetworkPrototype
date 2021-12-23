@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {addPostActionCreator, changePostActionCreator, TYPE_DISPATCH_CREATOR} from '../../Redax/State';
+import {addPostActionCreator, changePostActionCreator, TYPE_DISPATCH_CREATOR} from '../../Redux/profile_reducer';
 import p from './MyPosts.module.css';
 import {Posts} from "./Post/Posts";
 

@@ -2,7 +2,7 @@ import React, {ChangeEvent} from "react";
 import p from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {addDialogCreator, changeDialogsPost, TYPE_DISPATCH_CREATOR} from "../Redax/State";
+import {addDialogCreator, changeDialogsPost, TYPE_DISPATCH_CREATOR} from "../Redux/dialog_reducer";
 
 type DialogNickType = { id: number, name: string }
 type MessageType = { id: number, message: string }
