@@ -2,7 +2,6 @@ import {renderEnteerTree} from "../../index";
 import profileReducer from "./profile_reducer";
 import dialogsReducer from "./dialog_reducer";
 
-
 export type TYPE_DISPATCH_CREATOR = string
 type ActionPropsType = {
     type: TYPE_DISPATCH_CREATOR,
