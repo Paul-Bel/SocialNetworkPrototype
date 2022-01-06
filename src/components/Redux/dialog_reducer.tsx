@@ -1,11 +1,7 @@
 import React from "react";
 
 export type TYPE_DISPATCH_CREATOR = string
-// 'changePost' | 'addPost' | 'changeDialogPost' | 'addDialogPost'
-type ActionPropsType = {
-    type: TYPE_DISPATCH_CREATOR,
-    value?: string
-}
+type ActionPropsType = { type: TYPE_DISPATCH_CREATOR, value?: string }
 type PostType = { id: number, message: string, likescounte: number }
 type profilePageType = { post: Array<PostType>, newPostText: string }
 type dialogType = { id: number, name: string }
@@ -15,29 +11,61 @@ type messagesType = Array<messageType>
 type dialogsPagesType = { dialogNick: dialogNickType, messages: messagesType, messageBody: string }
 type siteBarType = { id: number }
 
-export type stateType = {
-    profilePage: profilePageType
-    dialogsPages: dialogsPagesType
-    siteBar: siteBarType
-}
 const changeDialogPost = 'changeDialogPost'
 const addDialogPost = 'addDialogPost'
-export const addDialogCreator = () => ({type: addDialogPost})
-export const changeDialogsPost = (value: string) => {
-    return ({type: changeDialogPost, value})
+export const addDialogCreatorAC = () => ({type: addDialogPost})
+export const changeDialogsPostAC = (value: string) => {
+    return ({type: changeDialogPost, value} as const )
 }
-const dialogsReducer = (action: ActionPropsType, state: stateType) => {
+
+type InitialStateType = {
+    dialogNick: { id: number, name: string }[],
+    messages: { id: number, message: string }[]
+    messageBody: string
+}
+
+let initialState: InitialStateType = {
+    dialogNick: [
+        {id: 1, name: 'Anatoliy'},
+        {id: 2, name: 'Sergey'},
+        {id: 3, name: 'Sveta'},
+        {id: 4, name: 'Nikifor'},
+        {id: 5, name: 'Arsrniy'},
+    ],
+    messages: [
+        {id: 1, message: "Hello"},
+        {id: 2, message: "How are you?"},
+        {id: 3, message: "I`am learn to React"},
+    ],
+    messageBody: ""
+}
+
+const dialogsReducer = (state = initialState, action: ActionPropsType): InitialStateType => {
 
     switch (action.type) {
-        case  changeDialogPost:
-            if (action.value)
-                state.dialogsPages.messageBody = action.value;
-            return state;
-        case addDialogPost:
-            let newDialogPost = {id: 3, message: state.dialogsPages.messageBody.trim()}
-            state.dialogsPages.messages.push(newDialogPost)
-            state.dialogsPages.messageBody = '';
-            return state;
+        case  changeDialogPost: {
+            return {
+                ...state,
+                messageBody: action.value ? action.value : ''
+            }
+        }
+            // if (action.value)
+            //     state.messageBody = action.value;
+            // return state;
+
+        case addDialogPost: {
+            let newDialogPost = {id: 3, message: state.messageBody.trim()}
+            return {
+                ...state,
+                messages: state.messages.concat(newDialogPost),
+                messageBody: ''
+            }
+        }
+            // let newDialogPost = {id: 3, message: state.messageBody.trim()}
+            // console.log('rttttttttttt')
+            // state.messages.push(newDialogPost)
+            // state.messageBody = '';
+            // return state;
         default:
             return state;
     }
