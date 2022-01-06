@@ -3,6 +3,7 @@ import p from './Profile.module.css';
 import '../../App.css'
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPosts} from "./MyPosts/MyPosts";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 
 export type TYPE_DISPATCH_CREATOR = string
@@ -25,11 +26,12 @@ export const Profile = (props: ProfilePropsType) => {
     return (
         <div className={p.content}>
             <ProfileInfo/>
-            <MyPosts
-                profilePage={props.profilePage}
-                dispatch={props.dispatch}
+            <MyPostsContainer/>
+            {/*<MyPosts*/}
+            {/*    profilePage={props.profilePage}*/}
+            {/*    dispatch={props.dispatch}*/}
 
-            />
+            {/*/>*/}
         </div>
     );
 }

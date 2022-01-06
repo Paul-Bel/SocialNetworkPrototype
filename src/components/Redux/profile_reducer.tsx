@@ -8,7 +8,6 @@ type ActionPropsType = {
 }
 type PostType = { id: number, message: string, likescounte: number, }
 type DataType = {post: PostType[], newPostText: string}
-
 let initialState: DataType =   {
         post: [
             {id: 1, message: "It's me. What are you doing?", likescounte: 5},
