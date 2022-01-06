@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {store} from "./components/Redux/Store";
+import store from "./components/Redux/Rudux_Store";
+import {Provider} from "react-redux";
+
 
 type PostType = { id: number, message: string, likescounte: number }
 type profilePageType = { post: Array<PostType>, newPostText: string }
@@ -20,19 +22,21 @@ export type stateType = {
 }
 
 
-export const renderEnteerTree = (data: stateType) => {
+export const renderEnteerTree = () => {
     ReactDOM.render(
+        <Provider store={store}>
         <App
-            data={data}
+            state={store.getState()}
             dispatch={store.dispatch.bind(store)}
         />,
-
+        </Provider>,
         document.getElementById('root')
     );
 }
 
+renderEnteerTree()
+store.subscribe(renderEnteerTree)
 
-renderEnteerTree(store.getState())
 // store.subscribe(renderEnteerTree)
 
 

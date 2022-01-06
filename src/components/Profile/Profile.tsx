@@ -3,9 +3,9 @@ import p from './Profile.module.css';
 import '../../App.css'
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPosts} from "./MyPosts/MyPosts";
-import {TYPE_DISPATCH_CREATOR} from "../Redux/Store";
 
 
+export type TYPE_DISPATCH_CREATOR = string
 type PostType = {
     id: number,
     message: string,

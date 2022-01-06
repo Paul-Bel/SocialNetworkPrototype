@@ -7,14 +7,14 @@ type ActionPropsType = {
     value?: string
 }
 type PostType = { id: number, message: string, likescounte: number, }
-type DialogNickType = { id: number, name: string }
-type MessageType = { id: number, message: string }
-type DataType = {
-    profilePage: { post: PostType[], newPostText: string }
-    dialogNick: DialogNickType[],
-    messages: MessageType[],
-    messageBody: string
-    sidebar: {}
+type DataType = {post: PostType[], newPostText: string}
+
+let initialState: DataType =   {
+        post: [
+            {id: 1, message: "It's me. What are you doing?", likescounte: 5},
+            {id: 2, message: "I'am learn", likescounte: 13},
+        ],
+            newPostText: '',
 }
 
 const addPost = 'addPost'
@@ -24,17 +24,17 @@ export const changePostActionCreator = (value: string) => {
     return ({type: changePost, value})
 }
 
-const profileReducer = (action: ActionPropsType, state: any) => {
+const profileReducer = (state: DataType = initialState, action: ActionPropsType) => {
     switch (action.type) {
         case changePost:
             if (action.value)
-                state.profilePage.newPostText = action.value;
+                state.newPostText = action.value;
             return state;
         case addPost:
-            if (state.profilePage.newPostText.trim()) {
-                let addNewPost = {id: 6, message: state.profilePage.newPostText.trim(), likescounte: 0}
-                state.profilePage.post.push(addNewPost)
-                state.profilePage.newPostText = ''
+            if (state.newPostText.trim()) {
+                let addNewPost = {id: 6, message: state.newPostText.trim(), likescounte: 0}
+                state.post.push(addNewPost)
+                state.newPostText = ''
             }
             ;
             return state;
