@@ -7,13 +7,13 @@ type ActionPropsType = {
     value?: string
 }
 type PostType = { id: number, message: string, likescounte: number, }
-type DataType = {post: PostType[], newPostText: string}
-let initialState: DataType =   {
-        post: [
-            {id: 1, message: "It's me. What are you doing?", likescounte: 5},
-            {id: 2, message: "I'am learn", likescounte: 13},
-        ],
-            newPostText: '',
+type DataType = { post: PostType[], newPostText: string }
+let initialState: DataType = {
+    post: [
+        {id: 1, message: "It's me. What are you doing?", likescounte: 5},
+        {id: 2, message: "I'am learn", likescounte: 13},
+    ],
+    newPostText: '',
 }
 
 const addPost = 'addPost'
@@ -25,18 +25,15 @@ export const changePostActionCreator = (value: string) => {
 
 const profileReducer = (state: DataType = initialState, action: ActionPropsType) => {
     switch (action.type) {
-        case changePost:
-            if (action.value)
-                state.newPostText = action.value;
-            return state;
-        case addPost:
-            if (state.newPostText.trim()) {
-                let addNewPost = {id: 6, message: state.newPostText.trim(), likescounte: 0}
-                state.post.push(addNewPost)
-                state.newPostText = ''
-            }
-            ;
-            return state;
+        case changePost: {
+            let newPost = {...state, newPostText: action.value}
+            return newPost;
+        }
+        case addPost: {
+            let addNewPost = {id: 6, message: state.newPostText.trim(), likescounte: 0}
+            let addPost = {...state, post: [...state.post, addNewPost], newPostText: ''}
+            return addPost;
+        }
         default:
             return state
     }
