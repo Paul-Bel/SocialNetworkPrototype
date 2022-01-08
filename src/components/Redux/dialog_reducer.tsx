@@ -61,11 +61,6 @@ const dialogsReducer = (state = initialState, action: ActionPropsType): InitialS
                 messageBody: ''
             }
         }
-            // let newDialogPost = {id: 3, message: state.messageBody.trim()}
-            // console.log('rttttttttttt')
-            // state.messages.push(newDialogPost)
-            // state.messageBody = '';
-            // return state;
         default:
             return state;
     }

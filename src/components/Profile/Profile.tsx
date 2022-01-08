@@ -2,7 +2,6 @@ import React from 'react';
 import p from './Profile.module.css';
 import '../../App.css'
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {MyPosts} from "./MyPosts/MyPosts";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 
