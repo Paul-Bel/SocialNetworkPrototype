@@ -6,7 +6,7 @@ import {userReducer} from "./user_reducer";
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPages: dialogsReducer,
-    user: userReducer,
+    users: userReducer,
     //siteBar: () => {}
 })
 
