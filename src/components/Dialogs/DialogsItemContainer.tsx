@@ -1,7 +1,7 @@
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {AppStateType} from "../Redux/Rudux_Store";
-import {addDialogCreatorAC, changeDialogsPostAC} from "../Redux/dialog_reducer"
+import {AppStateType} from "../../Redux/Rudux_Store";
+import {addDialogCreatorAC, changeDialogsPostAC} from "../../Redux/dialog_reducer"
 import React, {Dispatch} from "react";
 
 

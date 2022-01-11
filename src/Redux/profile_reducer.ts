@@ -1,7 +1,6 @@
-import React from "react";
 
 export type TYPE_DISPATCH_CREATOR = string
-// 'changePost' | 'addPost' | 'changeDialogPost' | 'addDialogPost'
+
 type ActionPropsType = {
     type: TYPE_DISPATCH_CREATOR,
     value?: string

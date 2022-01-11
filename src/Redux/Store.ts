@@ -1,4 +1,4 @@
-import {renderEnteerTree} from "../../index";
+import {renderEnteerTree} from "../index";
 // import profileReducer from "./profile_reducer";
 // import dialogsReducer from "./dialog_reducer";
 //

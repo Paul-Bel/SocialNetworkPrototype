@@ -3,13 +3,13 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Music} from "./components/Music/Music";
-import {AppStateType} from "./components/Redux/Rudux_Store";
+import {AppStateType} from "./Redux/Rudux_Store";
 import {DialogsItemContainer} from "./components/Dialogs/DialogsItemContainer";
+import {Users} from "./components/Users/Users";
 
 type PostType = { id: number, message: string, likescounte: number }
 type profilePageType = { post: Array<PostType>, newPostText: string }
@@ -47,31 +47,13 @@ const App = (props: AppDataType) => {
                         <Route path='/profile'
                                element={<Profile
                                    profilePage={props.state.profilePage}
-                                   dispatch={props.dispatch}
-                               />}/>
-
+                                   dispatch={props.dispatch}/>}/>
                         <Route path='/dialogs'
-                               element={
-                                   <DialogsItemContainer/>
-                               }
-                               //     <Dialogs dialogNick={props.state.dialogsPages.dialogNick}
-                               //                   messages={props.state.dialogsPages.messages}
-                               //                   messageBody={props.state.dialogsPages.messageBody}
-                               //                   dispatch={props.dispatch}
-                               //
-                               // />}
-                        >
+                               element={<DialogsItemContainer/>}>
                             <Route path='/dialogs:id'
-                                   element={
-                                       <DialogsItemContainer/>
-                                   //     <Dialogs dialogNick={props.state.dialogsPages.dialogNick}
-                                   //                   messages={props.state.dialogsPages.messages}
-                                   //                   messageBody={props.state.dialogsPages.messageBody}
-                                   //                   dispatch={props.dispatch}
-                                   // />
-
-                                   }/>
+                                   element={<DialogsItemContainer/>}/>
                         </Route>
+                        <Route path='/users' element={<Users/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                         <Route path='/music' element={<Music/>}/>

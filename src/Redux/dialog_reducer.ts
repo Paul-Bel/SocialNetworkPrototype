@@ -1,9 +1,7 @@
-import React from "react";
 
 export type TYPE_DISPATCH_CREATOR = string
 type ActionPropsType = { type: TYPE_DISPATCH_CREATOR, value?: string }
 type PostType = { id: number, message: string, likescounte: number }
-type profilePageType = { post: Array<PostType>, newPostText: string }
 type dialogType = { id: number, name: string }
 type dialogNickType = Array<dialogType>
 type messageType = { id: number, message: string }
