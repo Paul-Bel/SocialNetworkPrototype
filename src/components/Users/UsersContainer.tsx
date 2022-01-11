@@ -1,7 +1,7 @@
 import React, {Dispatch} from "react";
 import {Users} from "./Users";
 import {AppStateType} from "../../Redux/Rudux_Store";
-import {followAC, setUsersAC, StateType, unFollowAC, UserType} from "../../Redux/user_reducer";
+import {followAC, setUsersAC, unFollowAC, UserType} from "../../Redux/user_reducer";
 import {connect} from "react-redux";
 
 
@@ -19,9 +19,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
         changeUnFollow: (id: number) => {
             dispatch(unFollowAC(id))
         },
-        // setUsers: (state: StateType) => {
-        //     dispath(setUsersAC(state))
-        // }
+        setUsers: (users: UserType[]) => {
+            dispatch(setUsersAC(users))
+        }
     }
 }
 
