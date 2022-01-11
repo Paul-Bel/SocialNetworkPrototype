@@ -10,6 +10,7 @@ import {Music} from "./components/Music/Music";
 import {AppStateType} from "./Redux/Rudux_Store";
 import {DialogsItemContainer} from "./components/Dialogs/DialogsItemContainer";
 import {Users} from "./components/Users/Users";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 type PostType = { id: number, message: string, likescounte: number }
 type profilePageType = { post: Array<PostType>, newPostText: string }
@@ -53,7 +54,7 @@ const App = (props: AppDataType) => {
                             <Route path='/dialogs:id'
                                    element={<DialogsItemContainer/>}/>
                         </Route>
-                        <Route path='/users' element={<Users/>}/>
+                        <Route path='/users' element={<UsersContainer/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                         <Route path='/music' element={<Music/>}/>
