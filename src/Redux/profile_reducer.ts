@@ -1,10 +1,12 @@
+
 export type TYPE_DISPATCH_CREATOR = string
+
 type ActionPropsType = {
     type: TYPE_DISPATCH_CREATOR,
-    value: string
+    value?: string
 }
-export type PostType = { id: number, message: string, likescounte: number, }
-export type DataType = { post: PostType[], newPostText: string }
+type PostType = { id: number, message: string, likescounte: number, }
+type DataType = { post: PostType[], newPostText: string }
 let initialState: DataType = {
     post: [
         {id: 1, message: "It's me. What are you doing?", likescounte: 5},
@@ -20,10 +22,12 @@ export const changePostActionCreator = (value: string) => {
     return ({type: changePost, value})
 }
 
-const profileReducer = (state: DataType = initialState, action: ActionPropsType): DataType => {
+const profileReducer = (state: DataType = initialState, action: ActionPropsType) => {
     switch (action.type) {
-        case changePost:
-            return {...state, newPostText: action.value};
+        case changePost: {
+            let newPost = {...state, newPostText: action.value}
+            return newPost;
+        }
         case addPost: {
             let addNewPost = {id: 6, message: state.newPostText.trim(), likescounte: 0}
             let addPost = {...state, post: [...state.post, addNewPost], newPostText: ''}
