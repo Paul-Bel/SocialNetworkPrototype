@@ -1,3 +1,10 @@
 .usersPhoto {
     width: 80px;
 }
+.activePages {
+    font-weight: bold;
+    cursor: pointer;
+}
+.notActivePage {
+    cursor: pointer;
+}
