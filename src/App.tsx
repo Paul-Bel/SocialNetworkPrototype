@@ -9,23 +9,10 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {AppStateType} from "./Redux/Rudux_Store";
 import {DialogsItemContainer} from "./components/Dialogs/DialogsItemContainer";
-import {Users} from "./components/Users/Users";
 import {UsersContainer} from "./components/Users/UsersContainer";
 
-type PostType = { id: number, message: string, likescounte: number }
-type profilePageType = { post: Array<PostType>, newPostText: string }
-type dialogType = { id: number, name: string }
-type dialogNickType = Array<dialogType>
-type messageType = { id: number, message: string }
-type messagesType = Array<messageType>
-type dialogsPagesType = { dialogNick: dialogNickType, messages: messagesType, messageBody: string }
-type siteBarType = { id: number }
 export type TYPE_DISPATCH_CREATOR = string
-export type stateType = {
-    profilePage: profilePageType
-    dialogsPages: dialogsPagesType
-    siteBar: siteBarType
-}
+
 type ActionPropsType = {
     type: TYPE_DISPATCH_CREATOR,
     value?: string
@@ -47,6 +34,7 @@ const App = (props: AppDataType) => {
                     <Routes>
                         <Route path='/profile'
                                element={<Profile
+
                                    profilePage={props.state.profilePage}
                                    dispatch={props.dispatch}/>}/>
                         <Route path='/dialogs'

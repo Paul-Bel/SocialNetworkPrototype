@@ -3,8 +3,8 @@ type ActionPropsType = {
     type: TYPE_DISPATCH_CREATOR,
     value: string
 }
-type PostType = { id: number, message: string, likescounte: number, }
-type DataType = { post: PostType[], newPostText: string }
+export type PostType = { id: number, message: string, likescounte: number, }
+export type DataType = { post: PostType[], newPostText: string }
 let initialState: DataType = {
     post: [
         {id: 1, message: "It's me. What are you doing?", likescounte: 5},

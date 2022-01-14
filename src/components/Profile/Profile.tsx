@@ -6,11 +6,7 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 
 export type TYPE_DISPATCH_CREATOR = string
-type PostType = {
-    id: number,
-    message: string,
-    likescounte: number,
-}
+type PostType = {id: number, message: string, likescounte: number}
 type ActionPropsType = {
     type: TYPE_DISPATCH_CREATOR,
     value?: string
