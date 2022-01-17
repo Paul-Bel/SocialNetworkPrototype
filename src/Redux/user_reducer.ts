@@ -16,7 +16,6 @@ type USER_AC_TYPE = FOLLOW_AC
     | UN_FOLLOW_AC | CHANGE_PAGE_USERS_TYPE
     | SET_USERS_TYPE
 
-
 type FOLLOW_AC = { type: 'FOLLOW_', id: number }
 type UN_FOLLOW_AC = { type: 'UN_FOLLOW_', id: number }
 type SET_USERS_TYPE = { type: "SET_USERS", items: UseresType }
