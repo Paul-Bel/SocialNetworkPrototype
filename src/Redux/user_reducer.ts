@@ -45,11 +45,11 @@ const userReducer = (state: UseresType = initialState, action: USER_AC_TYPE): Us
         case 'UN_FOLLOW_':
             return {
                 ...state,
-                items: state.items.map(user => {
-                    if (user.id === action.id) {
-                        return {...user, followed: false}
+                items: state.items.map(us => {
+                    if (us.id === action.id) {
+                        return {...us, followed: false}
                     }
-                    return user
+                    return us
                 })
             };
         case "SET_USERS":
