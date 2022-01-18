@@ -7,13 +7,13 @@ import {UseresType} from "../../Redux/user_reducer";
 
 type UserPropsType = MapDispatchToPropsType & MapStateToPropsType
 
-class UsersC extends React.Component<UserPropsType, any> {
+class UsersC extends React.Component<UserPropsType> {
 
     componentDidMount() {
         axios.get<UseresType>
         (`https://social-network.samuraijs.com/api/1.0/users?page=
-        ${this.props.items.currentPage}
-        &count=${this.props.items.totalPageSize}`)
+        ${this.props.users.currentPage}
+        &count=${this.props.users.totalPageSize}`)
             .then(respons => {
                 this.props.setUsers(respons.data)
             })
@@ -23,7 +23,7 @@ class UsersC extends React.Component<UserPropsType, any> {
         axios.get<UseresType>
         (`https://social-network.samuraijs.com/api/1.0/users?page=
         ${pageNumber}
-        &count=${this.props.items.totalPageSize}`)
+        &count=${this.props.users.totalPageSize}`)
             .then(respons => {
                 this.props.setUsers(respons.data)
             })
@@ -45,14 +45,14 @@ class UsersC extends React.Component<UserPropsType, any> {
             <div>
                 {pageArr.map(p => {
                     return (<span
-                        className={this.props.items.currentPage === p ?
+                        className={this.props.users.currentPage === p ?
                             styles.activePages : styles.notActivePage}
                         key={p}
                         onClick={() => this.onPageChanged(p)}>{p + ' '}</span>)
                 })}
                 {/*<button onClick={this.showUsers}> Show users </button>*/}
                 {
-                    this.props.items.items.map(us => <div key={us.id}>
+                    this.props.users.items.map(us => <div key={us.id}>
                 <span>
                     <div>
                         <img className={styles.usersPhoto}
