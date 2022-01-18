@@ -15,8 +15,7 @@ class UsersC extends React.Component<UserPropsType> {
         ${this.props.users.currentPage}
         &count=${this.props.users.totalPageSize}`)
             .then(respons => {
-                this.props.setUsers(respons.data)
-            })
+                this.props.setUsers(respons.data)})
     }
 
     onPageChanged = (pageNumber: number) => {
@@ -41,7 +40,6 @@ class UsersC extends React.Component<UserPropsType> {
         }
 
         return (
-
             <div>
                 {pageArr.map(p => {
                     return (<span
@@ -76,11 +74,6 @@ class UsersC extends React.Component<UserPropsType> {
                 }</div>
         )
     }
-}
-
-export const Users = (props: UserPropsType) => {
-
-
 }
 
 export default UsersC
