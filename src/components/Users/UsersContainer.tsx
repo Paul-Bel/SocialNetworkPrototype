@@ -1,16 +1,16 @@
 import React, {Dispatch} from "react";
 import {AppStateType} from "../../Redux/Rudux_Store";
-import {followAC, setUsersAC, unFollowAC, UseresType, ItemsType, changePagesAC} from "../../Redux/user_reducer";
+import {followAC, setUsersAC, unFollowAC, UseresType, changePagesAC} from "../../Redux/user_reducer";
 import {connect} from "react-redux";
 import UsersC from "./UsersС";
 
 export type MapStateToPropsType = {
-    items: UseresType
+    users: UseresType
 }
 
 const mapStateToProps = (store: AppStateType):MapStateToPropsType => {
     return ({
-        items: store.users
+        users: store.users
     })
 }
 
