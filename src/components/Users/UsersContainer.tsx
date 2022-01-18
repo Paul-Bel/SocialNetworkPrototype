@@ -13,8 +13,6 @@ const mapStateToProps = (store: AppStateType):MapStateToPropsType => {
         users: store.users
     })
 }
-
-
 export type MapDispatchToPropsType = {
     changeFollow: (id: number) => void
     changeUnFollow: (id: number) => void
@@ -38,6 +36,5 @@ const mapDispatchToProps = (dispatch: Dispatch<any>): MapDispatchToPropsType => 
         },
     }
 }
-
 
 export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersC)
