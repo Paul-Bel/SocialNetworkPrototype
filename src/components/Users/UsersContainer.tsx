@@ -1,8 +1,14 @@
-import React, {Dispatch} from "react";
+import React from "react";
 import {AppStateType} from "../../Redux/Rudux_Store";
-import {followAC, setUsersAC, unFollowAC, UseresType, changePagesAC, changeFetching} from "../../Redux/user_reducer";
+import {
+    changeFollow,
+    setUsers,
+    changeUnFollow,
+    UseresType,
+    changePages,
+    changeFetching
+} from "../../Redux/user_reducer";
 import {connect} from "react-redux";
-
 import axios from "axios";
 import {Users} from "./UsersP/Users";
 import {Preloading} from "../PreLoading/Preloading";
@@ -28,25 +34,25 @@ export type MapDispatchToPropsType = {
     changeFetching?: (fetching: boolean) => void
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<any>): MapDispatchToPropsType => {
-    return {
-        changeFollow: (id: number) => {
-            dispatch(followAC(id))
-        },
-        changeUnFollow: (id: number) => {
-            dispatch(unFollowAC(id))
-        },
-        setUsers: (items: UseresType) => {
-            dispatch(setUsersAC(items))
-        },
-        changePages: (page: number) => {
-            dispatch(changePagesAC(page))
-        },
-        changeFetching: (fitching: boolean) => {
-            dispatch(changeFetching(fitching))
-        }
-    }
-}
+// const mapDispatchToProps = (dispatch: Dispatch<any>): MapDispatchToPropsType => {
+//     return {
+//         changeFollow: (id: number) => {
+//             dispatch(follow(id))
+//         },
+//         changeUnFollow: (id: number) => {
+//             dispatch(unFollow(id))
+//         },
+//         setUsers: (items: UseresType) => {
+//             dispatch(setUsers(items))
+//         },
+//         changePages: (page: number) => {
+//             dispatch(changePages(page))
+//         },
+//         changeFetching: (fitching: boolean) => {
+//             dispatch(changeFetching(fitching))
+//         }
+//     }
+// }
 
 class UsersAPIContainer extends React.Component<UserPropsType> {
 
@@ -61,31 +67,22 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
     }
 
     upDateUsers = (page: number) => {
-        this.props.changeFetching&&this.props.changeFetching(true)
+
+        this.props.changeFetching && this.props.changeFetching(true)
         axios.get<UseresType>
         (`https://social-network.samuraijs.com/api/1.0/users?page=
         ${page}
         &count=${this.props.users.totalPageSize}`)
             .then(respons => {
-                this.props.changeFetching&&this.props.changeFetching(false)
+                console.log(this.props.users.isFetching)
+                this.props.changeFetching && this.props.changeFetching(false)
                 this.props.setUsers && this.props.setUsers(respons.data)
             })
     }
 
-    // componentDidUpdate() {
-    //     debugger
-    //     axios.get<UseresType>
-    //     (`https://social-network.samuraijs.com/api/1.0/users?page=
-    //     ${this.props.currentPage}
-    //     &count=${this.props.users.totalPageSize}`)
-    //         .then(respons => {
-    //             this.props.setUsers(respons.data)
-    //         })
-    // }
-
     render() {
         return <>
-            {this.props.users.isFetching ? < Preloading/> :
+            {this.props.users.isFetching ? <Preloading/> :
                 <Users
                     users={this.props.users}
                     currentPage={this.props.currentPage}
@@ -94,11 +91,17 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
                     changeUnFollow={this.props.changeFollow}
                     upDateUsers={this.upDateUsers}
                 />
-                }
+            }
         </>
 
 
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer)
+export const UsersContainer = connect(mapStateToProps, {
+    changeFollow,
+    changeUnFollow,
+    setUsers,
+    changePages,
+    changeFetching,
+})(UsersAPIContainer)

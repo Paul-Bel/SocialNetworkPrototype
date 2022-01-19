@@ -15,7 +15,7 @@ export type UseresType = {
 }
 type USER_AC_TYPE = FOLLOW_AC
     | UN_FOLLOW_AC | CHANGE_PAGE_USERS_TYPE
-    | SET_USERS_TYPE |  CHANGE_FETCHING
+    | SET_USERS_TYPE | CHANGE_FETCHING
 
 type FOLLOW_AC = { type: 'FOLLOW_', id: number }
 type UN_FOLLOW_AC = { type: 'UN_FOLLOW_', id: number }
@@ -70,10 +70,10 @@ const userReducer = (state: UseresType = initialState, action: USER_AC_TYPE): Us
     }
 }
 
-export const followAC = (user_id: number): FOLLOW_AC => ({type: 'FOLLOW_', id: user_id})
-export const unFollowAC = (user_id: number): UN_FOLLOW_AC => ({type: 'UN_FOLLOW_', id: user_id})
-export const setUsersAC = (items: UseresType): SET_USERS_TYPE => ({type: "SET_USERS", items})
-export const changePagesAC = (currentPage: number): CHANGE_PAGE_USERS_TYPE => ({type: "CHANGE_USERS_PAGE", currentPage})
+export const changeFollow = (user_id: number): FOLLOW_AC => ({type: 'FOLLOW_', id: user_id})
+export const changeUnFollow = (user_id: number): UN_FOLLOW_AC => ({type: 'UN_FOLLOW_', id: user_id})
+export const setUsers = (items: UseresType): SET_USERS_TYPE => ({type: "SET_USERS", items})
+export const changePages = (currentPage: number): CHANGE_PAGE_USERS_TYPE => ({type: "CHANGE_USERS_PAGE", currentPage})
 export const changeFetching = (isFetching: boolean): CHANGE_FETCHING => ({type: "CHANGE_Fetching", isFetching})
 
 export default userReducer
