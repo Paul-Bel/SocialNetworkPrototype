@@ -1,0 +1,9 @@
+.itemDialogs {
+    padding: 15px;
+}
+
+.itemDialogs .active {
+    color: brown;
+    text-decoration: none;
+    
+}
