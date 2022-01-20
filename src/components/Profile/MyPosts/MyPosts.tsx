@@ -2,11 +2,7 @@ import React, {ChangeEvent} from 'react';
 import p from './MyPosts.module.css';
 import {Posts} from "./Post/Posts";
 
-type PostType = {
-    id: number,
-    message: string,
-    likescounte: number,
-}
+type PostType = {id: number, message: string, likescounte: number,}
 
 type ProfilePropsType = {
     profilePage: { post: PostType[], newPostText: string }
@@ -20,12 +16,9 @@ export const MyPosts = (props: ProfilePropsType) => {
     // let NewPost = React.createRef<HTMLTextAreaElement>()
     let addPost = () => {
         props.addNewText()
-        // props.dispatch(addPostActionCreator())
     }
     const changeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateText(e.currentTarget.value)
-        // props.dispatch(changePostActionCreator(e.currentTarget.value))
-
     }
     return (<div>
             <h3>My post</h3>

@@ -3,24 +3,13 @@ import p from './Profile.module.css';
 import '../../App.css'
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {MapPropsProfile} from "./ProfileContainer";
 
-
-export type TYPE_DISPATCH_CREATOR = string
-type PostType = {id: number, message: string, likescounte: number}
-type ActionPropsType = {
-    type: TYPE_DISPATCH_CREATOR,
-    value?: string
-}
-type ProfilePropsType = {
-    profilePage:{ post: PostType[], newPostText: string}
-    dispatch: (action: ActionPropsType) => void
-}
-
-export const Profile = (props: ProfilePropsType) => {
+export const Profile = (props: MapPropsProfile) => {
 
     return (
         <div className={p.content}>
-            <ProfileInfo/>
+            <ProfileInfo profilePage={props.profilePage}/>
             <MyPostsContainer/>
             {/*<MyPosts*/}
             {/*    profilePage={props.profilePage}*/}
