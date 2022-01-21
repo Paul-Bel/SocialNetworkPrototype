@@ -16,7 +16,11 @@ import withRouter from "../../Redux/withRoute";
 class ProfileContainer extends React.Component<MapPropsProfile &{router:{params:{userId: number}}}> {
 
     componentDidMount() {
-        const id = this.props.router.params.userId || 2
+        debugger
+        let id = this.props.router.params.userId
+        if(!this.props.router.params.userId){id = 2}
+        //debugger and this.props/////
+        console.log(id)
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
             .then(response => {
                 this.props.setProfile(response.data)
