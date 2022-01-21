@@ -35,6 +35,7 @@ const initialState: UseresType = {
 const userReducer = (state: UseresType = initialState, action: USER_AC_TYPE): UseresType => {
     switch (action.type) {
         case 'FOLLOW_':
+            console.log('ok')
             return {
                 ...state,
                 items: state.items.map(user => {
@@ -45,6 +46,7 @@ const userReducer = (state: UseresType = initialState, action: USER_AC_TYPE): Us
                 })
             };
         case 'UN_FOLLOW_':
+            console.log('not ok')
             return {
                 ...state,
                 items: state.items.map(us => {
