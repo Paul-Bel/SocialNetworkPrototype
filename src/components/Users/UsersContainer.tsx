@@ -18,7 +18,7 @@ export type MapDispatchToPropsType = {
 const mapStateToProps = (store: AppStateType): MapStateToPropsType => {
     return ({
         users: store.users,
-        currentPage: store.users.currentPage,
+        currentPage: store.users.currentPage+101,
     })
 }
 class UsersAPIContainer extends React.Component<UserPropsType> {
@@ -26,7 +26,7 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
     componentDidMount() {
         axios.get<UseresType>
         (`https://social-network.samuraijs.com/api/1.0/users?page=
-        ${this.props.currentPage}
+        ${this.props.currentPage+101}
         &count=${this.props.users.totalPageSize}`)
             .then(respons => {
                 this.props.setUsers && this.props.setUsers(respons.data)
@@ -42,7 +42,9 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
             .then(respons => {
                 this.props.changeFetching&&this.props.changeFetching(false)
                 this.props.setUsers && this.props.setUsers(respons.data)
+                this.props.changePages(page)
             })
+
     }
 
     render() {

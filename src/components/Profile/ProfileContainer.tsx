@@ -13,11 +13,11 @@ import {connect} from "react-redux";
 import withRouter from "../../Redux/withRoute";
 
 
+class ProfileContainer extends React.Component<MapPropsProfile &{router:{params:{userId: number}}}> {
 
-
-class ProfileContainer extends React.Component<MapPropsProfile> {
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/profile/2')
+        const id = this.props.router.params.userId || 2
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
             .then(response => {
                 this.props.setProfile(response.data)
             })
@@ -36,7 +36,8 @@ class ProfileContainer extends React.Component<MapPropsProfile> {
         );
     }
 }
-export type MapStateProfileProps = {profilePage: ProfileType}
+
+export type MapStateProfileProps = { profilePage: ProfileType }
 export type MapDispathToProps = {
     addPostProfile: () => void
     changePostProfile: (action: string) => void
@@ -50,9 +51,9 @@ export const MapStateProfile = (store: AppStateType): MapStateProfileProps => {
     })
 }
 
-let WithRouterProfile =  withRouter(ProfileContainer)
-export default connect(MapStateProfile,{
+let WithRouterProfile = withRouter(ProfileContainer)
+export default connect(MapStateProfile, {
     changePostProfile,
     addPostProfile,
     setProfile,
-})(ProfileContainer)
+})(WithRouterProfile)

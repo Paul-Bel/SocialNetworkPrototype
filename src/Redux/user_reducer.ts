@@ -55,11 +55,13 @@ const userReducer = (state: UseresType = initialState, action: USER_AC_TYPE): Us
                 })
             };
         case "SET_USERS":
+            console.log()
             return {
                 ...state,
                 items: [...action.items.items],
                 totalCount: action.items.totalCount,
-                error: action.items.error
+                error: action.items.error,
+                currentPage: action.items.currentPage,
             };
         case "CHANGE_USERS_PAGE":
             return {...state, currentPage: action.currentPage};

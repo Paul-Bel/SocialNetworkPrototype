@@ -9,6 +9,9 @@ export const Navbar = () => {
                 <NavLink to={"/profile/"} className={s.activLink}>Profile</NavLink>
             </div>
             <div className={s.item}>
+                <NavLink to={"/users/"} className={s.activLink}>Users</NavLink>
+            </div>
+            <div className={s.item}>
                 <NavLink to={"/dialogs/"} className={s.activLink}>Messages</NavLink>
             </div>
             <div className={s.item}>
@@ -20,11 +23,7 @@ export const Navbar = () => {
             <div className={s.item}>
                 <NavLink to={"/settings/"} className={s.activLink}>Sattings</NavLink>
             </div>
-            //
 
-            <div className={s.item}>
-                <NavLink to={"/users/"} className={s.activLink}>USERS</NavLink>
-            </div>
 
         </div>);
 }

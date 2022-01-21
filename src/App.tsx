@@ -32,7 +32,7 @@ const App = (props: AppDataType) => {
                 <div className={'app-wrapper-content'}>
 
                     <Routes>
-                        <Route path='/profile'
+                        <Route path='/profile/:userId'
                                element={<ProfileContainer/>}/>
                         <Route path='/dialogs'
                                element={<DialogsItemContainer/>}>

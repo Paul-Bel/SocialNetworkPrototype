@@ -12,7 +12,7 @@ type ProfilePropsType = {
 }
 
 export const MyPosts = (props: ProfilePropsType) => {
-    const postElement = props.profilePage.post.map(p => <Posts message={p.message} likescounte={p.likescounte}/>)
+    const postElement = props.profilePage.post.map(p => <Posts key={p.id} message={p.message} likescounte={p.likescounte}/>)
     // let NewPost = React.createRef<HTMLTextAreaElement>()
     let addPost = () => {
         props.addNewText()
