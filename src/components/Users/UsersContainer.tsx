@@ -16,6 +16,7 @@ export type MapDispatchToPropsType = {
     changeFetching?: (fetching: boolean) => void
 }
 const mapStateToProps = (store: AppStateType): MapStateToPropsType => {
+    // console.log(store.auth)
     return ({
         users: store.users,
         currentPage: store.users.currentPage,

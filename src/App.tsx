@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
@@ -10,6 +9,8 @@ import {AppStateType} from "./Redux/rudux_Store";
 import {DialogsItemContainer} from "./components/Dialogs/DialogsItemContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import { UsersContainer } from './components/Users/UsersContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
+
 
 export type TYPE_DISPATCH_CREATOR = string
 
@@ -25,15 +26,18 @@ type AppDataType = {
 const App = (props: AppDataType) => {
 
     return (
+
         <BrowserRouter>
             <div className='app-wrapper'>
-                <Header/>
+                <HeaderContainer/>
                 <Navbar/>
                 <div className={'app-wrapper-content'}>
 
                     <Routes>
-                        <Route path='/profile/:userId'
-                               element={<ProfileContainer/>}/>
+                        <Route path={'/profile'} element={<ProfileContainer/>}>
+                            <Route path='/profile:userId'
+                                   element={<ProfileContainer/>}/>
+                        </Route>
                         <Route path='/dialogs'
                                element={<DialogsItemContainer/>}>
                             <Route path='/dialogs:id'

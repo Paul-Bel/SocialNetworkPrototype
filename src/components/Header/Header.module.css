@@ -7,3 +7,8 @@
     grid-area: h;
     background-color: papayawhip;
 }
+
+.header a {
+    float: right;
+    margin: 15px;
+}
