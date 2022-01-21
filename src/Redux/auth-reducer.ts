@@ -9,17 +9,19 @@ export type InitialStateAuthType = {
     "messages": [],
     "fieldsErrors": [],
     "resultCode": number
+    isAuth: boolean,
 }
 
 let initialStateAuth: InitialStateAuthType = {
-    "data": {
-        "id": null,
-        "login": null,
-        "email": null,
+    data: {
+        id: null,
+        login: null,
+        email: null,
     },
-    "messages": [],
-    "fieldsErrors": [],
-    "resultCode": 0
+    messages: [],
+    fieldsErrors: [],
+    resultCode: 0,
+    isAuth: false,
 }
 
 

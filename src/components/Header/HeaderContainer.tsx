@@ -16,13 +16,16 @@ class HeaderContainer extends React.Component<MapToProps> {
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,
             {withCredentials: true})
             .then(response => {
-                this.props.setAuthHeader(response.data)
-                console.log(response.data)
+                if(response.data.resultCode === 0)
+                this.props.setAuthHeader({...response.data, isAuth: true})
             })
     }
 
     render() {
-        return <Header/>;
+        return (<Header
+            data={this.props.data}
+            isAuth={this.props.isAuth}
+        />)
     }
 }
 
