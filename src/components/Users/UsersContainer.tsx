@@ -1,6 +1,14 @@
 import React from "react";
 import {AppStateType} from "../../Redux/rudux_Store";
-import {follow, setUsers, unFollow, UseresType, changePages, changeFetching} from "../../Redux/user_reducer";
+import {
+    follow,
+    setUsers,
+    unFollow,
+    UseresType,
+    changePages,
+    changeFetching,
+    changeFollowingInProgress
+} from "../../Redux/user_reducer";
 import {connect} from "react-redux";
 import axios from "axios";
 import {Users} from "./UsersP/Users";
@@ -15,10 +23,11 @@ export type MapDispatchToPropsType = {
     unFollow: (id: number) => void
     setUsers: (items: UseresType) => void
     changePages: (page: number) => void
-    changeFetching?: (fetching: boolean) => void
+    changeFetching: (fetching: boolean) => void
+    changeFollowingInProgress: (followingInProgress: number, isFetchingD: boolean) => void
 }
 const mapStateToProps = (store: AppStateType): MapStateToPropsType => {
-    // console.log(store.auth)
+
     return ({
         users: store.users,
         currentPage: store.users.currentPage,
@@ -48,7 +57,7 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
 
     render() {
         return <>
-            {this.props.users.isFetching ? < Preloading/> :
+            {!this.props.users.isFetching ? < Preloading/> :
                 <Users
                     users={this.props.users}
                     currentPage={this.props.currentPage}
@@ -56,16 +65,21 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
                     changePages={this.props.changePages}
                     changeUnFollow={this.props.unFollow}
                     upDateUsers={this.upDateUsers}
+                    changeFetching={this.props.changeFetching}
+                    changeFollowingInProgress={this.props.changeFollowingInProgress}
                 />
             }
         </>
     }
 }
 
-export const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, AppStateType>(mapStateToProps, {
+export const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, AppStateType>(mapStateToProps,
+    {
     follow,
     unFollow,
     setUsers,
     changePages,
     changeFetching,
+    changeFollowingInProgress,
 })(UsersAPIContainer)
+
