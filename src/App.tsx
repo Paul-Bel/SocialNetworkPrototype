@@ -11,7 +11,6 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import { UsersContainer } from './components/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 
-
 export type TYPE_DISPATCH_CREATOR = string
 
 type ActionPropsType = {
@@ -26,13 +25,11 @@ type AppDataType = {
 const App = (props: AppDataType) => {
 
     return (
-
         <BrowserRouter>
             <div className='app-wrapper'>
                 <HeaderContainer/>
                 <Navbar/>
                 <div className={'app-wrapper-content'}>
-
                     <Routes>
                         <Route path={'/profile'} element={<ProfileContainer/>}>
                             <Route path='/profile:userId'
@@ -49,7 +46,6 @@ const App = (props: AppDataType) => {
                         <Route path='/music' element={<Music/>}/>
                     </Routes>
                 </div>
-
             </div>
         </BrowserRouter>
     );

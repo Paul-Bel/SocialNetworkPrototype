@@ -10,7 +10,6 @@ import {
     changeFollowingInProgress
 } from "../../Redux/user_reducer";
 import {connect} from "react-redux";
-import axios from "axios";
 import {Users} from "./UsersP/Users";
 import {Preloading} from "../PreLoading/Preloading";
 import {UserAPI} from "../../api/api";

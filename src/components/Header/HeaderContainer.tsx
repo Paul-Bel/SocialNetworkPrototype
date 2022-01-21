@@ -3,7 +3,7 @@ import '../../App.css'
 import {Header} from "./Header";
 import axios from "axios";
 import {connect} from "react-redux";
-import {AuthHeaderType, InitialStateAuthType, setAuthHeader} from "../../Redux/auth-reducer";
+import {InitialStateAuthType, setAuthHeader} from "../../Redux/auth-reducer";
 import {AppStateType} from "../../Redux/rudux_Store";
 
 

@@ -76,10 +76,7 @@ const userReducer = (state: UseresType = initialState, action: USER_AC_TYPE): Us
                     action.isFetchingD ?
                             [action.followingInProgress]
                             : state.followingInProgress.filter(f => f != action.followingInProgress)
-
             };
-
-
         default:
             return state;
     }
