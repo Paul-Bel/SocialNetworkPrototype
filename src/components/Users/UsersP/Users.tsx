@@ -57,7 +57,6 @@ export const Users = (props: UserPropsType) => {
                                     {}, {withCredentials: true,
                                         headers: {'API-KEY':"3c089002-10aa-48c7-80c6-fa863be7bb86"}})
                                 .then(response => {
-                                    console.log('response add', response)
                                         if (response.data.resultCode === 0) {
                                             props.changeFollow(us.id)
                                         }
@@ -69,7 +68,6 @@ export const Users = (props: UserPropsType) => {
                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${us.id}`,
                                      {withCredentials: true, headers: {'API-KEY':"3c089002-10aa-48c7-80c6-fa863be7bb86"}})
                                     .then(response => {
-                                        console.log('response ', response)
                                         if (response.data.resultCode === 0) {
                                             props.changeUnFollow(us.id)
                                         }

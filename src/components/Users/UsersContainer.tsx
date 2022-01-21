@@ -5,9 +5,11 @@ import {connect} from "react-redux";
 import axios from "axios";
 import {Users} from "./UsersP/Users";
 import {Preloading} from "../PreLoading/Preloading";
+import {UserAPI} from "../../api/api";
+
 export type OwnProps = {}
 export type UserPropsType = MapDispatchToPropsType & MapStateToPropsType
-export type MapStateToPropsType = {users: UseresType, currentPage: number}
+export type MapStateToPropsType = { users: UseresType, currentPage: number }
 export type MapDispatchToPropsType = {
     follow: (id: number) => void
     unFollow: (id: number) => void
@@ -22,27 +24,23 @@ const mapStateToProps = (store: AppStateType): MapStateToPropsType => {
         currentPage: store.users.currentPage,
     })
 }
+
 class UsersAPIContainer extends React.Component<UserPropsType> {
 
     componentDidMount() {
-        axios.get<UseresType>
-        (`https://social-network.samuraijs.com/api/1.0/users?page=
-        ${this.props.currentPage+100}
-        &count=${this.props.users.totalPageSize}`, {withCredentials: true})
+        UserAPI.getUsers(this.props.currentPage, this.props.users.totalPageSize)
             .then(respons => {
-                this.props.setUsers && this.props.setUsers(respons.data)
+                console.log(respons)
+                this.props.setUsers && this.props.setUsers(respons)
             })
     }
 
     upDateUsers = (page: number) => {
-        this.props.changeFetching&&this.props.changeFetching(true)
-        axios.get<UseresType>
-        (`https://social-network.samuraijs.com/api/1.0/users?page=
-        ${page}
-        &count=${this.props.users.totalPageSize}`, {withCredentials: true})
+        this.props.changeFetching && this.props.changeFetching(true)
+        UserAPI.upDateUser(page, this.props.users.totalPageSize)
             .then(respons => {
-                this.props.changeFetching&&this.props.changeFetching(false)
-                this.props.setUsers && this.props.setUsers(respons.data)
+                this.props.changeFetching && this.props.changeFetching(false)
+                this.props.setUsers && this.props.setUsers(respons)
                 this.props.changePages(page)
             })
 
@@ -59,12 +57,12 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
                     changeUnFollow={this.props.unFollow}
                     upDateUsers={this.upDateUsers}
                 />
-                }
+            }
         </>
     }
 }
 
-export const UsersContainer = connect<MapStateToPropsType,MapDispatchToPropsType, OwnProps, AppStateType >(mapStateToProps, {
+export const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, AppStateType>(mapStateToProps, {
     follow,
     unFollow,
     setUsers,
