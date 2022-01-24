@@ -1,3 +1,5 @@
+import {UserAPI} from "../api/api";
+
 export type ItemsType = {
     name: string,
     id: number,
@@ -74,8 +76,8 @@ const userReducer = (state: UseresType = initialState, action: USER_AC_TYPE): Us
             return {
                 ...state, followingInProgress:
                     action.isFetchingD ?
-                            [action.followingInProgress]
-                            : state.followingInProgress.filter(f => f != action.followingInProgress)
+                        [action.followingInProgress]
+                        : state.followingInProgress.filter(f => f != action.followingInProgress)
             };
         default:
             return state;
@@ -88,6 +90,20 @@ export const setUsers = (items: UseresType): SET_USERS_TYPE => ({type: "SET_USER
 export const changePages = (currentPage: number): CHANGE_PAGE_USERS_TYPE => ({type: "CHANGE_USERS_PAGE", currentPage})
 export const changeFetching = (isFetching: boolean): CHANGE_FETCHING => ({type: "CHANGE_Fetching", isFetching})
 export const changeFollowingInProgress = (followingInProgress: number, isFetchingD: boolean): changeFollowingInProgress => ({
-    type: "CHANGE_Disabled", followingInProgress, isFetchingD,})
+    type: "CHANGE_Disabled", followingInProgress, isFetchingD,
+})
+
+
+export const getUsers = (currentPage: number, totalPageSize: number) => {
+    return (dispatch) => {
+        changeFetching(false)
+        UserAPI.getUsers(currentPage, totalPageSize)
+            .then(respons => {
+                changeFetching(true)
+                setUsers(respons)
+            })
+    }
+}
+
 
 export default userReducer

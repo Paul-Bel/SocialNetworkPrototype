@@ -36,22 +36,22 @@ const mapStateToProps = (store: AppStateType): MapStateToPropsType => {
 class UsersAPIContainer extends React.Component<UserPropsType> {
 
     componentDidMount() {
+        this.props.changeFetching && this.props.changeFetching(false)
         UserAPI.getUsers(this.props.currentPage, this.props.users.totalPageSize)
             .then(respons => {
-                console.log(respons)
+                this.props.changeFetching && this.props.changeFetching(true)
                 this.props.setUsers && this.props.setUsers(respons)
             })
     }
 
     upDateUsers = (page: number) => {
-        this.props.changeFetching && this.props.changeFetching(true)
+        this.props.changeFetching && this.props.changeFetching(false)
         UserAPI.upDateUser(page, this.props.users.totalPageSize)
             .then(respons => {
-                this.props.changeFetching && this.props.changeFetching(false)
+                this.props.changeFetching && this.props.changeFetching(true)
                 this.props.setUsers && this.props.setUsers(respons)
                 this.props.changePages(page)
             })
-
     }
 
     render() {
