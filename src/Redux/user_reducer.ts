@@ -24,7 +24,7 @@ type USER_AC_TYPE = FOLLOW_AC
 
 type FOLLOW_AC = { type: 'FOLLOW_', id: number }
 type UN_FOLLOW_AC = { type: 'UN_FOLLOW_', id: number }
-type SET_USERS_TYPE = { type: "SET_USERS", items: UseresType }
+type SET_USERS_TYPE = { type: "SET_USERS", items: UseresType, currentPage: number }
 type CHANGE_PAGE_USERS_TYPE = { type: "CHANGE_USERS_PAGE", currentPage: number }
 type CHANGE_FETCHING = { type: "CHANGE_Fetching", isFetching: boolean }
 type changeFollowingInProgress = { type: "CHANGE_Disabled", followingInProgress: number, isFetchingD: boolean }
@@ -88,7 +88,7 @@ const userReducer = (state: UseresType = initialState, action: USER_AC_TYPE): Us
 
 export const follow = (user_id: number): FOLLOW_AC => ({type: 'FOLLOW_', id: user_id})
 export const unFollow = (user_id: number): UN_FOLLOW_AC => ({type: 'UN_FOLLOW_', id: user_id})
-export const setUsers = (items: UseresType): SET_USERS_TYPE => ({type: "SET_USERS", items})
+export const setUsers = (items: UseresType, currentPage: number): SET_USERS_TYPE => ({type: "SET_USERS", items, currentPage})
 export const changePages = (currentPage: number): CHANGE_PAGE_USERS_TYPE => ({type: "CHANGE_USERS_PAGE", currentPage})
 export const changeFetching = (isFetching: boolean): CHANGE_FETCHING => ({type: "CHANGE_Fetching", isFetching})
 export const changeFollowingInProgress = (followingInProgress: number, isFetchingD: boolean): changeFollowingInProgress => ({
@@ -103,8 +103,8 @@ export const getUsers = (currentPage: number, totalPageSize: number) => {
             .then(respons => {
                 debugger
                 dispatch(changeFetching(true))
-                dispatch(setUsers(respons))
-                dispatch(changePages(currentPage))
+                dispatch(setUsers(respons, currentPage))
+                // dispatch(changePages(currentPage))
             })
     }
 }
