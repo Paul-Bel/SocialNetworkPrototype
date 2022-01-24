@@ -23,7 +23,7 @@ export const Header = (props: HeaderPropsType) => {
                 alt=""/>
 <div className={p.nickName}>
             {props.isAuth ? props.data.login :
-            <NavLink to={'/logit'}>Login</NavLink>}
+            <NavLink to={'/login'}>Login</NavLink>}
 </div>
         </div>
 

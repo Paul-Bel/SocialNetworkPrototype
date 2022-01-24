@@ -10,6 +10,7 @@ let mapStateToProps = (store: AppStateType) => {
         dialogNick: store.dialogsPages.dialogNick,
         messages: store.dialogsPages.messages,
         messageBody: store.dialogsPages.messageBody,
+        isAuth: store.auth.isAuth
     })
 }
 let mapDispatchToProps = (dispatch: Dispatch<any>) => {

@@ -2,6 +2,7 @@ import React, {ChangeEvent} from "react";
 import p from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
+import {Navigate} from "react-router-dom";
 
 type DialogNickType = { id: number, name: string }
 type MessageType = { id: number, message: string }
@@ -12,8 +13,10 @@ type messagePost = {
     messageBody: string
     updateNewMessageBody: (value: string) => void
     sendMessage: () => void
+    isAuth: boolean
 }
 export const Dialogs: React.FC<messagePost> = (props) => {
+    if (props.isAuth){return <Navigate to='/login'/>}
     const dialogsElements = () =>
         props.dialogNick.map(d => <DialogItem name={d.name} id={d.id}/>)
     const messagesElement = props.messages.map(m => <Message message={m.message}/>)

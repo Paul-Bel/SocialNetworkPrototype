@@ -9,11 +9,12 @@ import {
 import {connect} from "react-redux";
 import {Users} from "./UsersP/Users";
 import {Preloading} from "../PreLoading/Preloading";
+import {Navigate} from "react-router-dom";
 
 
 export type OwnProps = {}
 export type UserPropsType = MapDispatchToPropsType & MapStateToPropsType
-export type MapStateToPropsType = { users: UseresType, currentPage: number }
+export type MapStateToPropsType = { users: UseresType, currentPage: number, isAuth: boolean }
 export type MapDispatchToPropsType = {
     getUsers: (currentPage: number, totalPageSize: number) => void
     changeFollowUser:(id: number) => void
@@ -24,6 +25,7 @@ const mapStateToProps = (store: AppStateType): MapStateToPropsType => {
     return ({
         users: store.users,
         currentPage: store.users.currentPage,
+        isAuth: store.auth.isAuth
     })
 }
 
@@ -50,6 +52,7 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
     }
 
     render() {
+        if (this.props.isAuth){return <Navigate to='/login'/>}
         return <>
             {!this.props.users.isFetching ? < Preloading/> :
                 <Users

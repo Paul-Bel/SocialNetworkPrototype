@@ -10,13 +10,16 @@ import {
 } from "../../Redux/profile_reducer";
 import {connect} from "react-redux";
 import withRouter from "../../Redux/withRoute";
+import { Navigate } from 'react-router-dom';
+
 
 
 
 class ProfileContainer extends React.Component<MapPropsProfile
-    & { router: { params: { userId: number } } } & { setProfileAPI: (id: number) => void }> {
+    & { router: { params: { userId: number } } } & { setProfileAPI: (id: number) => void}> {
 
     componentDidMount() {
+
         let id = this.props.router.params.userId
         if (!this.props.router.params.userId) {
             id = 2
@@ -29,6 +32,7 @@ class ProfileContainer extends React.Component<MapPropsProfile
     }
 
     render() {
+        if (this.props.isAuth === false){return <Navigate to='/login'/>}
         return (
             <div className={p.content}>
                 <Profile
@@ -41,16 +45,18 @@ class ProfileContainer extends React.Component<MapPropsProfile
     }
 }
 
-export type MapStateProfileProps = { profilePage: ProfileType }
+export type MapStateProfileProps = { profilePage: ProfileType, isAuth: boolean }
 export type MapDispathToProps = {
     addPostProfile: () => void
     changePostProfile: (action: string) => void
 }
 export type MapPropsProfile = MapStateProfileProps & MapDispathToProps
 
+
 export const MapStateProfile = (store: AppStateType): MapStateProfileProps => {
     return ({
         profilePage: store.profilePage,
+        isAuth: store.auth.isAuth,
     })
 }
 
