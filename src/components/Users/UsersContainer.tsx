@@ -2,29 +2,22 @@ import React from "react";
 import {AppStateType} from "../../Redux/rudux_Store";
 import {
     follow,
-    setUsers,
     unFollow,
     UseresType,
-    changePages,
-    changeFetching,
-    changeFollowingInProgress, getUsers
+    changeFollowingInProgress, getUsers, changeFollowUser, changeUnFollowUser
 } from "../../Redux/user_reducer";
 import {connect} from "react-redux";
 import {Users} from "./UsersP/Users";
 import {Preloading} from "../PreLoading/Preloading";
-import {UserAPI} from "../../api/api";
+
 
 export type OwnProps = {}
 export type UserPropsType = MapDispatchToPropsType & MapStateToPropsType
 export type MapStateToPropsType = { users: UseresType, currentPage: number }
 export type MapDispatchToPropsType = {
-    follow: (id: number) => void
-    unFollow: (id: number) => void
-    setUsers: (items: UseresType) => void
-    changePages: (page: number) => void
-    changeFetching: (fetching: boolean) => void
-    changeFollowingInProgress: (followingInProgress: number, isFetchingD: boolean) => void
     getUsers: (currentPage: number, totalPageSize: number) => void
+    changeFollowUser:(id: number) => void
+    changeUnFollowUser:(id: number) => void
 }
 const mapStateToProps = (store: AppStateType): MapStateToPropsType => {
 
@@ -62,12 +55,9 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
                 <Users
                     users={this.props.users}
                     currentPage={this.props.currentPage}
-                    changeFollow={this.props.follow}
-                    changePages={this.props.changePages}
-                    changeUnFollow={this.props.unFollow}
                     upDateUsers={this.upDateUsers}
-                    changeFetching={this.props.changeFetching}
-                    changeFollowingInProgress={this.props.changeFollowingInProgress}
+                    changeFollowUser={this.props.changeFollowUser}
+                    changeUnFollowUser={this.props.changeUnFollowUser}
                 />
             }
         </>
@@ -76,12 +66,8 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
 
 export const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, AppStateType>(mapStateToProps,
     {
-        follow,
-        unFollow,
-        setUsers,
-        changePages,
-        changeFetching,
-        changeFollowingInProgress,
         getUsers,
+        changeFollowUser,
+        changeUnFollowUser,
     })(UsersAPIContainer)
 

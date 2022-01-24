@@ -18,17 +18,16 @@ export const UserAPI = {
     },
 
     upDateUser(currentPage: number, totalPageSize: number) {
-
         return instance.get(`${URL}users?page=${currentPage}
         &count=${totalPageSize}`)
             .then(response => response.data)
     },
     follow (id: number){
-        axios.post(`${URL}follow/${id}`)
+        return instance.post(`${URL}follow/${id}`)
             .then(response => response.data.resultCode)
     },
     unFollow(id: number){
-        axios.delete(`${URL}follow/${id}`)
+        return instance.delete(`${URL}follow/${id}`)
             .then(response => response.data.resultCode)
     },
 }

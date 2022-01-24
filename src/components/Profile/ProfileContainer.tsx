@@ -18,7 +18,6 @@ class ProfileContainer extends React.Component<MapPropsProfile &{router:{params:
     componentDidMount() {
         let id = this.props.router.params.userId
         if(!this.props.router.params.userId){id = 2}
-        //debugger and this.props/////
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
             .then(response => {
                 this.props.setProfile(response.data)

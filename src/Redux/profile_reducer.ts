@@ -103,7 +103,6 @@ const profileReducer = (state: ProfileType = initialState, action: ActionReducer
             return state
         }
         case 'SET_PROFILE':
-            // debugger
             return {...state,
                 aboutMe: action.action.aboutMe,
                 contacts: {...action.action.contacts},
