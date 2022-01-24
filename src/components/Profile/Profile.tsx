@@ -5,6 +5,8 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {MapPropsProfile} from "./ProfileContainer";
 
+
+
 export const Profile = (props: MapPropsProfile) => {
 
     return (

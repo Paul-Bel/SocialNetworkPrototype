@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {authMe} from "../api/api";
+
 export type AuthHeaderType = { type: 'AUTH_ME', action: InitialStateAuthType }
 type ActionAuthType = AuthHeaderType
 export type InitialStateAuthType = {
@@ -38,3 +41,12 @@ const authReducer = (state = initialStateAuth, action: ActionAuthType): InitialS
 
 export const setAuthHeader = (state: InitialStateAuthType): AuthHeaderType => ({type: 'AUTH_ME', action: state})
 export default authReducer
+export const checkAuth = () => {
+    return (dispatch: Dispatch) => {
+        authMe.me()
+            .then(data => {
+                if(data.resultCode === 0)
+                    dispatch(setAuthHeader({...data, isAuth: true}))
+            })
+    }
+}

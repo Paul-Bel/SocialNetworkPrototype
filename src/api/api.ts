@@ -10,7 +10,6 @@ const URL = 'https://social-network.samuraijs.com/api/1.0/'
 
 export const UserAPI = {
     getUsers(currentPage: number, totalPageSize: number) {
-
         return instance.get(`users?page=${currentPage}&count=${totalPageSize}`)
             .then(response => {
                 return response.data
@@ -30,6 +29,15 @@ export const UserAPI = {
         return instance.delete(`${URL}follow/${id}`)
             .then(response => response.data.resultCode)
     },
+    getProfile(id: number){
+        return instance.get(`${URL}profile/${id}`)
+    }
+}
+export const authMe = {
+    me (){
+        return instance.get(`${URL}auth/me`,)
+            .then(response => response.data)
+    }
 }
 
 

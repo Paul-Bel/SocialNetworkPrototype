@@ -98,7 +98,7 @@ export const changeFollowingInProgress = (followingInProgress: number, isFetchin
 export const getUsers = (currentPage: number, totalPageSize: number) => {
     return (dispatch: Dispatch, getState: () => AppStateType) => {
         dispatch(changeFetching(false))
-        UserAPI.getUsers(currentPage, totalPageSize)
+        UserAPI.getUsers(currentPage+102, totalPageSize)
             .then(respons => {
                 dispatch(changeFetching(true))
                 dispatch(setUsers(respons, currentPage))

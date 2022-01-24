@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {UserAPI} from "../api/api";
+
 export type PostType = { id: number, message: string, likescounte: number, }
 export type ContactType = {
     facebook: string | null,
@@ -55,32 +58,7 @@ let initialState: ProfileType = {
     ],
     newPostText: '',
 }
-// let initialState: ProfileType = {
-//     aboutMe: "я круто чувак 1001%",
-//     contacts: <ContactType> {
-//         facebook: "facebook.com",
-//         website: null,
-//         vk: "vk.com/dimych",
-//         twitter: "https://twitter.com/@sdf",
-//         instagram: "instagra.com/sds",
-//         youtube: null,
-//         github: "github.com",
-//         mainLink: "null",
-//     },
-//     lookingForAJob: true,
-//     lookingForAJobDescription: "не ищу, а дурачусь",
-//     fullName: "samurai dimych",
-//     userId: 2,
-//     photos: {
-//         small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-//         "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-//     },
-//     post: [
-//         {id: 1, message: "It's me. What are you doing?", likescounte: 5},
-//         {id: 2, message: "I'am learn", likescounte: 13},
-//     ],
-//     newPostText: '',
-// }
+
 
 type ActionReducerType = AddPostProfileType | ChangePostProfileType | SetProfileType
 export type AddPostProfileType = {type: 'addPost'}
@@ -116,5 +94,14 @@ const profileReducer = (state: ProfileType = initialState, action: ActionReducer
             return state
     }
 }
+
+export const setProfileAPI = (id: number) => {
+    return (dispatch: Dispatch) => {
+        UserAPI.getProfile(id).then(response => {
+            dispatch(setProfile(response.data))
+        })
+    }
+}
+
 
 export default profileReducer
