@@ -18,7 +18,6 @@ export type MapDispatchToPropsType = {
 }
 
 export const Users = (props: UserPropsType) => {
-    console.log(props.users.items)
     let pageArr = []
     let totalPages = 10
     // Math.ceil(this.props.items.totalCount / this.props.items.totalPageSize)
@@ -33,8 +32,8 @@ export const Users = (props: UserPropsType) => {
     return (
         <div>
             {pageArr.map(p => {
-
                 return (<span
+
                     className={props.currentPage === p ?
                         styles.activePages : styles.notActivePage}
                     key={p}

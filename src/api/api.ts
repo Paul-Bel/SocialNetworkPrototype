@@ -10,19 +10,28 @@ const URL = 'https://social-network.samuraijs.com/api/1.0/'
 
 export const UserAPI = {
     getUsers(currentPage: number, totalPageSize: number) {
+
         return instance.get(`users?page=${currentPage}&count=${totalPageSize}`)
-            .then(response => response.data)
+            .then(response => {
+                return response.data
+            })
     },
 
     upDateUser(currentPage: number, totalPageSize: number) {
+
         return instance.get(`${URL}users?page=${currentPage}
         &count=${totalPageSize}`)
             .then(response => response.data)
-    }
+    },
+    follow (id: number){
+        axios.post(`${URL}follow/${id}`)
+            .then(response => response.data.resultCode)
+    },
+    unFollow(id: number){
+        axios.delete(`${URL}follow/${id}`)
+            .then(response => response.data.resultCode)
+    },
 }
 
 
-// axios.get<UseresType>
-// (`https://social-network.samuraijs.com/api/1.0/users?page=
-//         ${this.props.currentPage+100}
-//         &count=${this.props.users.totalPageSize}`, {})
+

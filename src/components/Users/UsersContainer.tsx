@@ -7,7 +7,7 @@ import {
     UseresType,
     changePages,
     changeFetching,
-    changeFollowingInProgress
+    changeFollowingInProgress, getUsers
 } from "../../Redux/user_reducer";
 import {connect} from "react-redux";
 import {Users} from "./UsersP/Users";
@@ -24,6 +24,7 @@ export type MapDispatchToPropsType = {
     changePages: (page: number) => void
     changeFetching: (fetching: boolean) => void
     changeFollowingInProgress: (followingInProgress: number, isFetchingD: boolean) => void
+    getUsers: (currentPage: number, totalPageSize: number) => void
 }
 const mapStateToProps = (store: AppStateType): MapStateToPropsType => {
 
@@ -34,24 +35,25 @@ const mapStateToProps = (store: AppStateType): MapStateToPropsType => {
 }
 
 class UsersAPIContainer extends React.Component<UserPropsType> {
-
     componentDidMount() {
-        this.props.changeFetching && this.props.changeFetching(false)
-        UserAPI.getUsers(this.props.currentPage, this.props.users.totalPageSize)
-            .then(respons => {
-                this.props.changeFetching && this.props.changeFetching(true)
-                this.props.setUsers && this.props.setUsers(respons)
-            })
+        this.props.getUsers(this.props.currentPage, this.props.users.totalPageSize)
+        // this.props.changeFetching && this.props.changeFetching(false)
+        // UserAPI.getUsers(this.props.currentPage, this.props.users.totalPageSize)
+        //     .then(respons => {
+        //         this.props.changeFetching && this.props.changeFetching(true)
+        //         this.props.setUsers && this.props.setUsers(respons)
+        //     })
     }
 
     upDateUsers = (page: number) => {
-        this.props.changeFetching && this.props.changeFetching(false)
-        UserAPI.upDateUser(page, this.props.users.totalPageSize)
-            .then(respons => {
-                this.props.changeFetching && this.props.changeFetching(true)
-                this.props.setUsers && this.props.setUsers(respons)
-                this.props.changePages(page)
-            })
+        this.props.getUsers(page, this.props.users.totalPageSize)
+        // this.props.changeFetching && this.props.changeFetching(false)
+        // UserAPI.upDateUser(page, this.props.users.totalPageSize)
+        //     .then(respons => {
+        //         this.props.changeFetching && this.props.changeFetching(true)
+        //         this.props.setUsers && this.props.setUsers(respons)
+        //         this.props.changePages(page)
+        //     })
     }
 
     render() {
@@ -74,11 +76,12 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
 
 export const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, AppStateType>(mapStateToProps,
     {
-    follow,
-    unFollow,
-    setUsers,
-    changePages,
-    changeFetching,
-    changeFollowingInProgress,
-})(UsersAPIContainer)
+        follow,
+        unFollow,
+        setUsers,
+        changePages,
+        changeFetching,
+        changeFollowingInProgress,
+        getUsers,
+    })(UsersAPIContainer)
 
