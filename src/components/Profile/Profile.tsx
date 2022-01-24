@@ -17,11 +17,6 @@ export const Profile = (props: MapPropsProfileP) => {
         <div className={p.content}>
             <ProfileInfo profilePage={props.profilePage}/>
             <MyPostsContainer/>
-            {/*<MyPosts*/}
-            {/*    profilePage={props.profilePage}*/}
-            {/*    dispatch={props.dispatch}*/}
-
-            {/*/>*/}
         </div>
     );
 }

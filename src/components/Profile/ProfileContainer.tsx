@@ -11,6 +11,7 @@ import {
 import {connect} from "react-redux";
 import withRouter from "../../Redux/withRoute";
 import { Navigate } from 'react-router-dom';
+import {withRedirect} from "../hoc/withRedirect";
 
 
 
@@ -32,7 +33,6 @@ class ProfileContainer extends React.Component<MapPropsProfile
     }
 
     render() {
-        if (this.props.isAuth === false){return <Navigate to='/login'/>}
         return (
             <div className={p.content}>
                 <Profile
@@ -45,7 +45,7 @@ class ProfileContainer extends React.Component<MapPropsProfile
     }
 }
 
-export type MapStateProfileProps = { profilePage: ProfileType, isAuth: boolean }
+export type MapStateProfileProps = { profilePage: ProfileType}
 export type MapDispathToProps = {
     addPostProfile: () => void
     changePostProfile: (action: string) => void
@@ -56,11 +56,11 @@ export type MapPropsProfile = MapStateProfileProps & MapDispathToProps
 export const MapStateProfile = (store: AppStateType): MapStateProfileProps => {
     return ({
         profilePage: store.profilePage,
-        isAuth: store.auth.isAuth,
     })
 }
+let authRedirectComponent = withRedirect(ProfileContainer)
+let WithRouterProfile = withRouter(authRedirectComponent)
 
-let WithRouterProfile = withRouter(ProfileContainer)
 export default connect(MapStateProfile, {
     changePostProfile,
     addPostProfile,

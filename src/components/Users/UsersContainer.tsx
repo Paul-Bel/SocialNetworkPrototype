@@ -10,11 +10,12 @@ import {connect} from "react-redux";
 import {Users} from "./UsersP/Users";
 import {Preloading} from "../PreLoading/Preloading";
 import {Navigate} from "react-router-dom";
+import {withRedirect} from "../hoc/withRedirect";
 
 
 export type OwnProps = {}
 export type UserPropsType = MapDispatchToPropsType & MapStateToPropsType
-export type MapStateToPropsType = { users: UseresType, currentPage: number, isAuth: boolean }
+export type MapStateToPropsType = { users: UseresType, currentPage: number}
 export type MapDispatchToPropsType = {
     getUsers: (currentPage: number, totalPageSize: number) => void
     changeFollowUser:(id: number) => void
@@ -25,7 +26,6 @@ const mapStateToProps = (store: AppStateType): MapStateToPropsType => {
     return ({
         users: store.users,
         currentPage: store.users.currentPage,
-        isAuth: store.auth.isAuth
     })
 }
 
@@ -52,7 +52,6 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
     }
 
     render() {
-        if (this.props.isAuth){return <Navigate to='/login'/>}
         return <>
             {!this.props.users.isFetching ? < Preloading/> :
                 <Users
@@ -66,11 +65,13 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
         </>
     }
 }
-
+let authRedirectComponent = withRedirect(UsersAPIContainer)
 export const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, AppStateType>(mapStateToProps,
     {
         getUsers,
         changeFollowUser,
         changeUnFollowUser,
-    })(UsersAPIContainer)
+    })(authRedirectComponent)
+
+
 
