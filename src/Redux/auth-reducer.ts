@@ -41,6 +41,7 @@ const authReducer = (state = initialStateAuth, action: ActionAuthType): InitialS
 
 export const setAuthHeader = (state: InitialStateAuthType): AuthHeaderType => ({type: 'AUTH_ME', action: state})
 export default authReducer
+
 export const checkAuth = () => {
     return (dispatch: Dispatch) => {
         authMe.me()
