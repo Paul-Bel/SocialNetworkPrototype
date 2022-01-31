@@ -13,10 +13,10 @@ export const ProfileInfo = (props: ProfileInfoType) => {
             {/*<img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Istanbul_IMG_7257_1725.jpg"*/}
             {/*     alt=""/>*/}
             <div  className={s.info}>
-               <img className={s.photoSmall} src={props.profilePage.photos.small} alt="картинка маленькая"/>
-                <img className={s.photoSmall} src={props.profilePage.photos.large} alt="картинка большая"/>
+               {/*<img className={s.photoSmall} src={props.profilePage.photos.small} alt="картинка маленькая"/>*/}
+                <img  src={props.profilePage.photos.large} alt="картинка большая"/>
                <div> {props.profilePage.fullName} </div>
-                <ProfileStatus/>
+                <ProfileStatus value={'Hello Anastasiia'}/>
             </div>
         </div>
     )
