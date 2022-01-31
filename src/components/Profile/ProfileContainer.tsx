@@ -20,13 +20,18 @@ class ProfileContainer extends React.Component<MapPropsProfile
     & { router: { params: { userId: number } } }> {
 
     componentDidMount() {
-
         let id = this.props.router.params.userId
         if (!this.props.router.params.userId) {
             id = 21545
         }
         this.props.setProfileAPI(id)
         this.props.getUserStatusAPI(id)
+    }
+    componentDidUpdate(prevProps: MapStateProfileProps ) {
+        // debugger
+        if(this.props.status != prevProps.status){
+            // this.setState(this.props.status)
+        }
     }
 
     render() {

@@ -3,13 +3,15 @@ import profileReducer from "./profile_reducer";
 import dialogsReducer from "./dialog_reducer";
 import userReducer from "./user_reducer";
 import authReducer from "./auth-reducer";
-import thankMiddleware from 'redux-thunk'
+import thankMiddleware from 'redux-thunk';
+import { reducer as formReducer } from 'redux-form';
 
 let rootReduser = combineReducers({
     profilePage: profileReducer,
     dialogsPages: dialogsReducer,
     users: userReducer,
     auth: authReducer,
+    form: formReducer,
     //siteBar: () => {}
 })
 
