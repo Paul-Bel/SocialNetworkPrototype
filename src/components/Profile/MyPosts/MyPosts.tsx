@@ -3,7 +3,6 @@ import p from './MyPosts.module.css';
 import {Posts} from "./Post/Posts";
 import {Field, reduxForm} from "redux-form";
 
-
 type PostType = {id: number, message: string, likescounte: number,}
 
 type ProfilePropsType = {
