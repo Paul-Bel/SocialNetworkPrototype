@@ -1,10 +1,11 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import {AppStateType} from "../../Redux/rudux_Store";
 import {UseresType, getUsers, changeFollowUser, changeUnFollowUser} from "../../Redux/user_reducer";
 import {connect} from "react-redux";
 import {Users} from "./UsersP/Users";
 import {Preloading} from "../PreLoading/Preloading";
 import {withRedirect} from "../hoc/withRedirect";
+import { compose } from "redux";
 
 
 export type OwnProps = {}
@@ -46,13 +47,23 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
         </>
     }
 }
-let authRedirectComponent = withRedirect(UsersAPIContainer)
-export const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, AppStateType>(mapStateToProps,
-    {
-        getUsers,
-        changeFollowUser,
-        changeUnFollowUser,
-    })(authRedirectComponent)
+// let authRedirectComponent = withRedirect(UsersAPIContainer)
+//
+// export const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, AppStateType>(mapStateToProps,
+//     {
+//         getUsers,
+//         changeFollowUser,
+//         changeUnFollowUser,
+//     })(authRedirectComponent)
+
+export const UsersContainer = compose<ComponentType>(
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, AppStateType>(mapStateToProps,
+        {
+            getUsers,
+            changeFollowUser,
+            changeUnFollowUser,
+        }),
+    withRedirect,)(UsersAPIContainer)
 
 
 

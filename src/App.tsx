@@ -6,7 +6,7 @@ import {Settings} from "./components/Settings/Settings";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {AppStateType} from "./Redux/rudux_Store";
-import {DialogsItemContainer} from "./components/Dialogs/DialogsItemContainer";
+import DialogsItemContainer from "./components/Dialogs/DialogsItemContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import { UsersContainer } from './components/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType, ReactComponentElement} from 'react';
 import p from './Profile.module.css';
 import '../../App.css'
 import {Profile} from "./Profile";
@@ -12,6 +12,7 @@ import {connect} from "react-redux";
 import withRouter from "../../Redux/withRoute";
 import { Navigate } from 'react-router-dom';
 import {withRedirect} from "../hoc/withRedirect";
+import { compose } from 'redux';
 
 
 
@@ -58,11 +59,21 @@ export const MapStateProfile = (store: AppStateType): MapStateProfileProps => {
         profilePage: store.profilePage,
     })
 }
-let authRedirectComponent = withRedirect(ProfileContainer)
-let WithRouterProfile = withRouter(authRedirectComponent)
+// let authRedirectComponent = withRedirect(ProfileContainer)
+// let WithRouterProfile = withRouter(authRedirectComponent)
+//
+// connect(MapStateProfile, {
+//     changePostProfile,
+//     addPostProfile,
+//     setProfileAPI,
+// })(WithRouterProfile)
 
-export default connect(MapStateProfile, {
-    changePostProfile,
-    addPostProfile,
-    setProfileAPI,
-})(WithRouterProfile)
+export default compose<ComponentType>(
+    connect(MapStateProfile, {
+        changePostProfile,
+        addPostProfile,
+        setProfileAPI,
+    }),
+    withRouter,
+    withRedirect,
+)(ProfileContainer)

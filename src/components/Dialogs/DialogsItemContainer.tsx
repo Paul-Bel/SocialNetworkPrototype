@@ -2,9 +2,9 @@ import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/rudux_Store";
 import {addDialogCreatorAC, changeDialogsPostAC} from "../../Redux/dialog_reducer"
-import React from "react";
+import React, {ComponentType} from "react";
 import {withRedirect} from "../hoc/withRedirect";
-import { Dispatch } from "redux";
+import {compose, Dispatch } from "redux";
 
 
 let mapStateToProps = (store: AppStateType) => {
@@ -22,6 +22,12 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
             dispatch(addDialogCreatorAC())}
     }
 }
-let authRedirectComponent = withRedirect(Dialogs)
+// let authRedirectComponent = withRedirect(Dialogs)
+//
+// export const DialogsItemContainer = connect(mapStateToProps, mapDispatchToProps)(authRedirectComponent)
 
-export const DialogsItemContainer = connect(mapStateToProps, mapDispatchToProps)(authRedirectComponent)
+
+export default compose<ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRedirect,
+)(Dialogs)

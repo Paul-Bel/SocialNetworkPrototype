@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import {Navigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/rudux_Store";
@@ -7,7 +7,7 @@ let MapStToProps = (state: AppStateType) =>({
     isAuth: state.auth.isAuth
 })
 
-export const withRedirect = (Component: React.JSXElementConstructor<any>) => {
+export const withRedirect = (Component: ComponentType) => {
     class RenderComponent extends React.Component<any> {
         render() {
             if (!this.props.isAuth) {
