@@ -12,7 +12,7 @@ export type ContactType = {
     github: string | null,
     mainLink: string | null,
 }
-export type PhotoProfileType = { small: string | undefined, "large": string | undefined,}
+export type PhotoProfileType = { small: string | undefined, "large": string | undefined, }
 export type ProfileType = {
     aboutMe: string | null,
     contacts: ContactType
@@ -23,7 +23,8 @@ export type ProfileType = {
     photos: PhotoProfileType,
     post: PostType[],
     newPostText: string,
-    status: string,}
+    status: string,
+}
 export type ForProfileServetType = {
     aboutMe: string | null,
     contacts: ContactType
@@ -37,7 +38,7 @@ export type ActionGetStatusUserType = string
 
 let initialState: ProfileType = {
     aboutMe: null,
-    contacts: <ContactType> {
+    contacts: <ContactType>{
         facebook: null,
         website: null,
         vk: null,
@@ -51,7 +52,7 @@ let initialState: ProfileType = {
     lookingForAJobDescription: null,
     fullName: null,
     userId: null,
-    photos:<PhotoProfileType> {
+    photos: <PhotoProfileType>{
         small: undefined,
         large: undefined,
     },
@@ -65,30 +66,28 @@ let initialState: ProfileType = {
 
 
 type ActionReducerType = AddPostProfileType | ChangePostProfileType | SetProfileType | GetUserStatusType
-export type AddPostProfileType = {type: 'addPost'}
-export type ChangePostProfileType = {type: 'changePost', action: string}
-export type SetProfileType = {type: 'SET_PROFILE', action: ForProfileServetType}
-export type GetUserStatusType = {type: 'GET_USER_STATUS', action: ActionGetStatusUserType}
-export type UpdateStatusType = {type: 'UPDATE_STATUS', action: string}
+export type AddPostProfileType = { type: 'addPost', payload: { value: string } }
+export type ChangePostProfileType = { type: 'changePost', action: string }
+export type SetProfileType = { type: 'SET_PROFILE', action: ForProfileServetType }
+export type GetUserStatusType = { type: 'GET_USER_STATUS', action: ActionGetStatusUserType }
 
-export const addPostProfile = (): AddPostProfileType => ({type: 'addPost'})
-export const changePostProfile = (action: string):ChangePostProfileType => ({type: 'changePost', action})
-export const setProfile = (action: ForProfileServetType):SetProfileType => ({type: 'SET_PROFILE', action})
-export const getUserStatus = (action: ActionGetStatusUserType):GetUserStatusType => ({type: 'GET_USER_STATUS', action})
+
+export const addPostProfile = (value: string): AddPostProfileType => ({type: 'addPost', payload: {value}})
+export const changePostProfile = (action: string): ChangePostProfileType => ({type: 'changePost', action})
+export const setProfile = (action: ForProfileServetType): SetProfileType => ({type: 'SET_PROFILE', action})
+export const getUserStatus = (action: ActionGetStatusUserType): GetUserStatusType => ({type: 'GET_USER_STATUS', action})
 
 const profileReducer = (state: ProfileType = initialState, action: ActionReducerType): ProfileType => {
     switch (action.type) {
         case 'changePost':
             return {...state, newPostText: action.action};
         case 'addPost': {
-            let addNewPost = {id: 6, message: state.newPostText, likescounte: 0}
-            if (state.newPostText.trim()) {
-                return {...state, post: [...state.post, addNewPost], newPostText: ''}
-            }
-            return state
-        };
+            let addNewPost = {id: 6, message: action.payload.value, likescounte: 0}
+            return {...state, post: [...state.post, addNewPost], newPostText: ''}
+        }
         case 'SET_PROFILE':
-            return {...state,
+            return {
+                ...state,
                 aboutMe: action.action.aboutMe,
                 contacts: {...action.action.contacts},
                 lookingForAJob: action.action.lookingForAJob,
@@ -120,12 +119,12 @@ export const getUserStatusAPI = (id: number) => {
 }
 export const UpDateStatusAPI = (status: string) => {
     return (dispatch: Dispatch) => {
-        ProfileAPI.updateStatus({status })
+        ProfileAPI.updateStatus({status})
             .then(response => {
-            if(response.data.resultCode === 0) {
-                dispatch(getUserStatus(status))
-            }
-        })
+                if (response.data.resultCode === 0) {
+                    dispatch(getUserStatus(status))
+                }
+            })
     }
 }
 
