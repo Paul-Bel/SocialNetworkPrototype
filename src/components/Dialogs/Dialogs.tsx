@@ -1,9 +1,8 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import p from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {Navigate} from "react-router-dom";
-import {Field, Form, reduxForm} from "redux-form";
+import {Field, reduxForm} from "redux-form";
 
 type DialogNickType = { id: number, name: string }
 type MessageType = { id: number, message: string }
@@ -11,21 +10,17 @@ type MessageType = { id: number, message: string }
 type messagePost = {
     dialogNick: DialogNickType[],
     messages: MessageType[],
-    messageBody: string
-    updateNewMessageBody: (value: string) => void
-    sendMessage: () => void
+    sendMessage: (value: string) => void
     isAuth: boolean
 }
 export const Dialogs: React.FC<messagePost> = (props) => {
     const dialogsElements = () =>
         props.dialogNick.map(d => <DialogItem name={d.name} id={d.id}/>)
     const messagesElement = props.messages.map(m => <Message message={m.message}/>)
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewMessageBody(e.currentTarget.value)
-    }
-    const addPost = () => props.sendMessage()
-    const onSubmit = (value: any) => {
 
+    const onSubmit = (value: any) => {
+        console.log(value)
+        props.sendMessage(value.addMayPost)
     }
     return (
         <div className={p.dialogs}>
@@ -43,12 +38,14 @@ export const Dialogs: React.FC<messagePost> = (props) => {
 const AddPostForm = (props: any) => {
 
     return <>
-        <Form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit}>
+            <div>
             <Field name={'addMayPost'} component={"textarea"}/>
-        </Form>
+            </div>
         <div>
             <button>add</button>
         </div>
+        </form>
     </>
 }
 
