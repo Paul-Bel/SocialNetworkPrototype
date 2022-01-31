@@ -4,7 +4,7 @@ import {ProfileType} from "../../../Redux/profile_reducer";
 import {ProfileStatus} from "./ProfileStatus";
 
 
-type ProfileInfoType = {profilePage: ProfileType}
+type ProfileInfoType = {profilePage: ProfileType, status: string, UpDateStatusAPI: (value: string) => void}
 
 export const ProfileInfo = (props: ProfileInfoType) => {
     return (
@@ -16,7 +16,10 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                {/*<img className={s.photoSmall} src={props.profilePage.photos.small} alt="картинка маленькая"/>*/}
                 <img  src={props.profilePage.photos.large} alt="картинка большая"/>
                <div> {props.profilePage.fullName} </div>
-                <ProfileStatus value={'Hello Anastasiia'}/>
+                <ProfileStatus
+                    value={props.profilePage.status}
+                    UpDateStatusAPI={props.UpDateStatusAPI}
+                />
             </div>
         </div>
     )

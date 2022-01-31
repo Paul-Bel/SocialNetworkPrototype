@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {UserAPI} from "../api/api";
+import {ProfileAPI, UserAPI} from "../api/api";
 
 export type PostType = { id: number, message: string, likescounte: number, }
 export type ContactType = {
@@ -22,7 +22,8 @@ export type ProfileType = {
     userId: number | null,
     photos: PhotoProfileType,
     post: PostType[],
-    newPostText: string, }
+    newPostText: string,
+    status: string,}
 export type ForProfileServetType = {
     aboutMe: string | null,
     contacts: ContactType
@@ -32,6 +33,8 @@ export type ForProfileServetType = {
     userId: number,
     photos: PhotoProfileType,
 }
+export type ActionGetStatusUserType = string
+
 let initialState: ProfileType = {
     aboutMe: null,
     contacts: <ContactType> {
@@ -57,17 +60,21 @@ let initialState: ProfileType = {
         {id: 2, message: "I'am learn", likescounte: 13},
     ],
     newPostText: '',
+    status: '',
 }
 
 
-type ActionReducerType = AddPostProfileType | ChangePostProfileType | SetProfileType
+type ActionReducerType = AddPostProfileType | ChangePostProfileType | SetProfileType | GetUserStatusType
 export type AddPostProfileType = {type: 'addPost'}
 export type ChangePostProfileType = {type: 'changePost', action: string}
 export type SetProfileType = {type: 'SET_PROFILE', action: ForProfileServetType}
+export type GetUserStatusType = {type: 'GET_USER_STATUS', action: ActionGetStatusUserType}
+export type UpdateStatusType = {type: 'UPDATE_STATUS', action: string}
 
 export const addPostProfile = (): AddPostProfileType => ({type: 'addPost'})
 export const changePostProfile = (action: string):ChangePostProfileType => ({type: 'changePost', action})
 export const setProfile = (action: ForProfileServetType):SetProfileType => ({type: 'SET_PROFILE', action})
+export const getUserStatus = (action: ActionGetStatusUserType):GetUserStatusType => ({type: 'GET_USER_STATUS', action})
 
 const profileReducer = (state: ProfileType = initialState, action: ActionReducerType): ProfileType => {
     switch (action.type) {
@@ -79,7 +86,7 @@ const profileReducer = (state: ProfileType = initialState, action: ActionReducer
                 return {...state, post: [...state.post, addNewPost], newPostText: ''}
             }
             return state
-        }
+        };
         case 'SET_PROFILE':
             return {...state,
                 aboutMe: action.action.aboutMe,
@@ -89,7 +96,9 @@ const profileReducer = (state: ProfileType = initialState, action: ActionReducer
                 fullName: action.action.fullName,
                 userId: action.action.userId,
                 photos: {...action.action.photos},
-            }
+            };
+        case 'GET_USER_STATUS':
+            return {...state, status: action.action};
         default:
             return state
     }
@@ -102,6 +111,22 @@ export const setProfileAPI = (id: number) => {
         })
     }
 }
-
+export const getUserStatusAPI = (id: number) => {
+    return (dispatch: Dispatch) => {
+        ProfileAPI.getStatus(id).then(response => {
+            dispatch(getUserStatus(response.data))
+        })
+    }
+}
+export const UpDateStatusAPI = (status: string) => {
+    return (dispatch: Dispatch) => {
+        ProfileAPI.updateStatus({status })
+            .then(response => {
+            if(response.data.resultCode === 0) {
+                dispatch(getUserStatus(status))
+            }
+        })
+    }
+}
 
 export default profileReducer

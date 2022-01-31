@@ -17,25 +17,38 @@ export const UserAPI = {
     },
 
     upDateUser(currentPage: number, totalPageSize: number) {
-        return instance.get(`${URL}users?page=${currentPage}
+        return instance.get(`users?page=${currentPage}
         &count=${totalPageSize}`)
             .then(response => response.data)
     },
     follow (id: number){
-        return instance.post(`${URL}follow/${id}`)
+        return instance.post(`follow/${id}`)
             .then(response => response.data.resultCode)
     },
     unFollow(id: number){
-        return instance.delete(`${URL}follow/${id}`)
+        return instance.delete(`follow/${id}`)
             .then(response => response.data.resultCode)
     },
     getProfile(id: number){
-        return instance.get(`${URL}profile/${id}`)
+        console.warn('Obsolete method. Please ProfileAPI object')
+        return instance.get(`profile/${id}`)
     }
+}
+
+export const ProfileAPI = {
+    getProfile(id: number){
+        return instance.get(`profile/${id}`)
+    },
+    getStatus(userID: number){
+        return instance.get(`profile/status/${userID}`)
+    },
+    updateStatus(status:{status: string}){
+        return instance.put(`profile/status`, status)
+    },
 }
 export const authMe = {
     me (){
-        return instance.get(`${URL}auth/me`,)
+        return instance.get(`auth/me`,)
             .then(response => response.data)
     }
 }

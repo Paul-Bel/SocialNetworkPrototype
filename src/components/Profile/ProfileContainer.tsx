@@ -1,16 +1,15 @@
-import React, {ComponentType, ReactComponentElement} from 'react';
+import React, {ComponentType} from 'react';
 import p from './Profile.module.css';
 import '../../App.css'
 import {Profile} from "./Profile";
 import {AppStateType} from "../../Redux/rudux_Store";
 import {
     addPostProfile,
-    changePostProfile,
-    ProfileType, setProfileAPI
+    changePostProfile, getUserStatusAPI,
+    ProfileType, setProfileAPI, UpDateStatusAPI
 } from "../../Redux/profile_reducer";
 import {connect} from "react-redux";
 import withRouter from "../../Redux/withRoute";
-import { Navigate } from 'react-router-dom';
 import {withRedirect} from "../hoc/withRedirect";
 import { compose } from 'redux';
 
@@ -18,19 +17,16 @@ import { compose } from 'redux';
 
 
 class ProfileContainer extends React.Component<MapPropsProfile
-    & { router: { params: { userId: number } } } & { setProfileAPI: (id: number) => void}> {
+    & { router: { params: { userId: number } } }> {
 
     componentDidMount() {
 
         let id = this.props.router.params.userId
         if (!this.props.router.params.userId) {
-            id = 2
+            id = 21545
         }
         this.props.setProfileAPI(id)
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
-        // UserAPI.getProfile(id).then(response => {
-        //         this.props.setProfile(response.data)
-        //     })
+        this.props.getUserStatusAPI(id)
     }
 
     render() {
@@ -39,17 +35,22 @@ class ProfileContainer extends React.Component<MapPropsProfile
                 <Profile
                     profilePage={this.props.profilePage}
                     changePostProfile={this.props.changePostProfile}
-                    addPostProfile={addPostProfile}
+                    addPostProfile={this.props.addPostProfile}
+                    status={this.props.status}
+                    UpDateStatusAPI={this.props.UpDateStatusAPI}
                 />
             </div>
         );
     }
 }
 
-export type MapStateProfileProps = { profilePage: ProfileType}
+export type MapStateProfileProps = { profilePage: ProfileType, status: string}
 export type MapDispathToProps = {
     addPostProfile: () => void
     changePostProfile: (action: string) => void
+    setProfileAPI: (id: number) => void
+    getUserStatusAPI: (id: number) => void
+    UpDateStatusAPI: (id: string) => void
 }
 export type MapPropsProfile = MapStateProfileProps & MapDispathToProps
 
@@ -57,6 +58,7 @@ export type MapPropsProfile = MapStateProfileProps & MapDispathToProps
 export const MapStateProfile = (store: AppStateType): MapStateProfileProps => {
     return ({
         profilePage: store.profilePage,
+        status: store.profilePage.status,
     })
 }
 // let authRedirectComponent = withRedirect(ProfileContainer)
@@ -73,6 +75,8 @@ export default compose<ComponentType>(
         changePostProfile,
         addPostProfile,
         setProfileAPI,
+        UpDateStatusAPI,
+        getUserStatusAPI,
     }),
     withRouter,
     withRedirect,

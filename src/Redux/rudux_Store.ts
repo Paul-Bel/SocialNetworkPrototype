@@ -5,7 +5,7 @@ import userReducer from "./user_reducer";
 import authReducer from "./auth-reducer";
 import thankMiddleware from 'redux-thunk'
 
-let reducers = combineReducers({
+let rootReduser = combineReducers({
     profilePage: profileReducer,
     dialogsPages: dialogsReducer,
     users: userReducer,
@@ -14,9 +14,9 @@ let reducers = combineReducers({
 })
 
 
-export type AppStateType = ReturnType<typeof reducers>
+export type AppStateType = ReturnType<typeof rootReduser>
 
-const store = createStore(reducers, applyMiddleware(thankMiddleware))
+const store = createStore(rootReduser, applyMiddleware(thankMiddleware))
 
 //@ts-ignore
 window.store = store;
