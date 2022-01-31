@@ -1,13 +1,7 @@
-
 export type TYPE_DISPATCH_CREATOR = string
 type ActionPropsType = { type: TYPE_DISPATCH_CREATOR, value?: string }
-type PostType = { id: number, message: string, likescounte: number }
-type dialogType = { id: number, name: string }
-type dialogNickType = Array<dialogType>
-type messageType = { id: number, message: string }
-type messagesType = Array<messageType>
-type dialogsPagesType = { dialogNick: dialogNickType, messages: messagesType, messageBody: string }
-type siteBarType = { id: number }
+
+
 
 const changeDialogPost = 'changeDialogPost'
 const addDialogPost = 'addDialogPost'
@@ -47,9 +41,6 @@ const dialogsReducer = (state = initialState, action: ActionPropsType): InitialS
                 messageBody: action.value ? action.value : ''
             }
         }
-            // if (action.value)
-            //     state.messageBody = action.value;
-            // return state;
 
         case addDialogPost: {
             let newDialogPost = {id: 3, message: state.messageBody.trim()}

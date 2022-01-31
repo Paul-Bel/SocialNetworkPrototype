@@ -3,6 +3,7 @@ import p from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {Navigate} from "react-router-dom";
+import {Field, Form, reduxForm} from "redux-form";
 
 type DialogNickType = { id: number, name: string }
 type MessageType = { id: number, message: string }
@@ -23,7 +24,9 @@ export const Dialogs: React.FC<messagePost> = (props) => {
         props.updateNewMessageBody(e.currentTarget.value)
     }
     const addPost = () => props.sendMessage()
+    const onSubmit = (value: any) => {
 
+    }
     return (
         <div className={p.dialogs}>
             <div className={p.itemDialogs}>
@@ -31,20 +34,22 @@ export const Dialogs: React.FC<messagePost> = (props) => {
             </div>
             <div className={p.messages}>
                 {messagesElement}
-                <div>
-                    <textarea
-                        value={props.messageBody}
-                        onChange={onChangeHandler}
-                    />
-                </div>
-                <div>
-                    <button
-                        onClick={addPost}
-                    >add
-                    </button>
-                </div>
+                <LoginReduxForm onSubmit={onSubmit}/>
             </div>
         </div>
     )
 }
 
+const AddPostForm = (props: any) => {
+
+    return <>
+        <Form onSubmit={props.handleSubmit}>
+            <Field name={'addMayPost'} component={"textarea"}/>
+        </Form>
+        <div>
+            <button>add</button>
+        </div>
+    </>
+}
+
+const LoginReduxForm = reduxForm({form: 'AddPost'})(AddPostForm)
