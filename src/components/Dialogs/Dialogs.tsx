@@ -2,23 +2,23 @@ import React from "react";
 import p from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 type DialogNickType = { id: number, name: string }
 type MessageType = { id: number, message: string }
-
 type messagePost = {
     dialogNick: DialogNickType[],
     messages: MessageType[],
     sendMessage: (value: string) => void
     isAuth: boolean
 }
+type FormType = {addMayPost: string}
 export const Dialogs: React.FC<messagePost> = (props) => {
     const dialogsElements = () =>
         props.dialogNick.map(d => <DialogItem name={d.name} id={d.id}/>)
     const messagesElement = props.messages.map(m => <Message message={m.message}/>)
 
-    const onSubmit = (value: any) => {
+    const onSubmit = (value: FormType) => {
         console.log(value)
         props.sendMessage(value.addMayPost)
     }
@@ -35,7 +35,7 @@ export const Dialogs: React.FC<messagePost> = (props) => {
     )
 }
 
-const AddPostForm = (props: any) => {
+const AddPostForm: React.FC<InjectedFormProps<FormType>> = (props) => {
 
     return <>
         <form onSubmit={props.handleSubmit}>
@@ -49,4 +49,4 @@ const AddPostForm = (props: any) => {
     </>
 }
 
-const LoginReduxForm = reduxForm({form: 'AddPost'})(AddPostForm)
+const LoginReduxForm = reduxForm<FormType>({form: 'AddPost'})(AddPostForm)

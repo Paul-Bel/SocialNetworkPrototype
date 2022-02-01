@@ -49,36 +49,12 @@ export const Users = (props: UserPropsType) => {
                                 disabled={props.users.followingInProgress.some(s => s == us.id)}
                                 onClick={() => {
                                     props.changeFollowUser(us.id)
-                                    // props.changeFollowingInProgress(us.id, true)
-                                    // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${us.id}`,
-                                    //     {}, {
-                                    //         withCredentials: true,
-                                    //         headers: {'API-KEY': "3c089002-10aa-48c7-80c6-fa863be7bb86"}
-                                    //     })
-                                    //     .then(response => {
-                                    //         props.changeFollowingInProgress(us.id, false)
-                                    //         if (response.data.resultCode === 0) {
-                                    //             props.changeFollow(us.id)
-                                    //         }
-                                    //     })
                                 }
                                 }>Follow</button> :
                             <button
                                 disabled={props.users.followingInProgress.some(s => s == us.id)}
                                 onClick={() => {
                                     props.changeUnFollowUser(us.id)
-                                    // props.changeFollowingInProgress(us.id, true)
-                                    // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${us.id}`,
-                                    //     {
-                                    //         withCredentials: true,
-                                    //         headers: {'API-KEY': "3c089002-10aa-48c7-80c6-fa863be7bb86"}
-                                    //     })
-                                    //     .then(response => {
-                                    //         props.changeFollowingInProgress(us.id, false)
-                                    //         if (response.data.resultCode === 0) {
-                                    //             props.changeUnFollow(us.id)
-                                    //         }
-                                    //     })
                                 }}>Unfollow</button>}
 
                     </div>
