@@ -7,7 +7,6 @@ import {Preloading} from "../PreLoading/Preloading";
 import {withRedirect} from "../hoc/withRedirect";
 import { compose } from "redux";
 
-
 export type OwnProps = {}
 export type UserPropsType = MapDispatchToPropsType & MapStateToPropsType
 export type MapStateToPropsType = { users: UseresType, currentPage: number}
@@ -17,7 +16,6 @@ export type MapDispatchToPropsType = {
     changeUnFollowUser:(id: number) => void
 }
 const mapStateToProps = (store: AppStateType): MapStateToPropsType => {
-
     return ({
         users: store.users,
         currentPage: store.users.currentPage,
@@ -26,13 +24,9 @@ const mapStateToProps = (store: AppStateType): MapStateToPropsType => {
 
 class UsersAPIContainer extends React.Component<UserPropsType> {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.users.totalPageSize)
-    }
-
+        this.props.getUsers(this.props.currentPage, this.props.users.totalPageSize)}
     upDateUsers = (page: number) => {
-        this.props.getUsers(page, this.props.users.totalPageSize)
-    }
-
+        this.props.getUsers(page, this.props.users.totalPageSize)}
     render() {
         return <>
             {!this.props.users.isFetching ? < Preloading/> :
@@ -64,6 +58,3 @@ export const UsersContainer = compose<ComponentType>(
             changeUnFollowUser,
         }),
     withRedirect,)(UsersAPIContainer)
-
-
-
