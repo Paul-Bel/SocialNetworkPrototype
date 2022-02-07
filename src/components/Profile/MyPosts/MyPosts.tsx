@@ -3,7 +3,7 @@ import p from './MyPosts.module.css';
 import {Posts} from "./Post/Posts";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLength, required} from "../../../utils/validation/validators";
-import {FormControl} from "../../../utils/form/FormControl";
+import {TextArea} from "../../../utils/form/FormControl";
 
 type PostType = {id: number, message: string, likescounte: number,}
 
@@ -37,7 +37,7 @@ export const MyPosts = (props: ProfilePropsType) => {
 
 const MyPostInputForm: React.FC<InjectedFormProps<FormInputType, {}> & {}> = (props) => {
     return <form onSubmit={props.handleSubmit}>
-       <Field name={'addMyPost'} component={FormControl}
+       <Field name={'addMyPost'} component={TextArea}
               validate={[required, validateLength10]}
        />
         <div>
