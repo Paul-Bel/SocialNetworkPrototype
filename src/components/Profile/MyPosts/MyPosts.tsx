@@ -2,6 +2,8 @@ import React from 'react';
 import p from './MyPosts.module.css';
 import {Posts} from "./Post/Posts";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLength, required} from "../../../utils/validation/validators";
+import {FormControl} from "../../../utils/form/FormControl";
 
 type PostType = {id: number, message: string, likescounte: number,}
 
@@ -10,6 +12,9 @@ type ProfilePropsType = {
     addPostProfile: (value: string) => void
 }
 type FormInputType = {addMyPost: string}
+
+const validateLength10 = maxLength(10)
+
 
 export const MyPosts = (props: ProfilePropsType) => {
     const postElement = props.profilePage.post.map(p => <Posts key={p.id} message={p.message} likescounte={p.likescounte}/>)
@@ -30,9 +35,11 @@ export const MyPosts = (props: ProfilePropsType) => {
     );
 }
 
-const MyPostInputForm: React.FC<InjectedFormProps<FormInputType>> = (props) => {
+const MyPostInputForm: React.FC<InjectedFormProps<FormInputType, {}> & {}> = (props) => {
     return <form onSubmit={props.handleSubmit}>
-       <Field name={'addMyPost'} component={'textarea'}/>
+       <Field name={'addMyPost'} component={FormControl}
+              validate={[required, validateLength10]}
+       />
         <div>
             <button>Add post</button>
         </div>

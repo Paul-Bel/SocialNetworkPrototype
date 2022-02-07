@@ -23,7 +23,9 @@ const Loginform: React.FC<InjectedFormProps<LoginType>> = (props) => {
 }
 const LoginReduxForm = reduxForm<LoginType> ({form: 'Login'})(Loginform)
 export const Login = () => {
+
     const onSubmit = (formData: LoginType) => {
+        console.log(formData)
     }
     return (
         <LoginReduxForm onSubmit={onSubmit}/>
