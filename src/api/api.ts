@@ -5,8 +5,14 @@ const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {'API-KEY': "3c089002-10aa-48c7-80c6-fa863be7bb86"},
 })
-
-const URL = 'https://social-network.samuraijs.com/api/1.0/'
+type ResponseLoginType = {
+    resultCode: number
+    messages: Array<any>,
+    data: {
+        userId: number
+    }
+}
+// const URL = 'https://social-network.samuraijs.com/api/1.0/'
 
 export const UserAPI = {
     getUsers(currentPage: number, totalPageSize: number) {
@@ -50,8 +56,19 @@ export const authMe = {
     me (){
         return instance.get(`auth/me`,)
             .then(response => response.data)
-    }
+    },
+    loginMe(payload: { email: string, password: string, rememberMe: boolean, captcha?: boolean }){
+        // console.log('api: ',payload)
+        return instance.post('auth/login',payload)
+            .then(response => response.data)
+    },
+    logUotMe(){
+        return instance.delete('auth/login')
+            .then(response => response.data)
+    },
+
 }
+
 
 
 

@@ -2,7 +2,7 @@
     grid-area: n;
     background-color: darkblue;
     padding: 10%;
-    height: ;
+    min-width: 160px;
 }
 
 .item {

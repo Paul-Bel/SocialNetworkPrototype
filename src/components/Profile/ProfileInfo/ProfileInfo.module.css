@@ -1,6 +1,9 @@
 .info {
     padding: 10px;
 }
+.info img {
+    width: 350px;
+}
 .photoSmall {
     max-width: 100px;
 }

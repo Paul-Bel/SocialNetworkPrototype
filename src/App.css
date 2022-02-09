@@ -14,16 +14,20 @@
 }
 
 .app-wrapper-content {
-  background-color: yellowgreen;
+    background-color: rgb(175, 157, 37);
     grid-area: c;
+    max-width: 100%;
+    padding: 5px 10px;
 }
 
 .header {
     grid-area: h;
 }
+
 .nav {
     grid-area: n;
 }
+
 .content {
     /*grid-area: c;*/
     /*display: grid;*/

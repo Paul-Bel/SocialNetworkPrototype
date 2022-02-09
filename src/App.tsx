@@ -10,7 +10,9 @@ import DialogsItemContainer from "./components/Dialogs/DialogsItemContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import { UsersContainer } from './components/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
-import {Login} from "./components/Header/Login";
+import Login from "./components/Header/Login";
+import {loginUser} from "./Redux/auth-reducer";
+
 
 
 export type TYPE_DISPATCH_CREATOR = string
@@ -33,7 +35,7 @@ const App = (props: AppDataType) => {
                 <Navbar/>
                 <div className={'app-wrapper-content'}>
                     <Routes>
-                        <Route path='/login' element={<Login/>}/>
+                        <Route path='/login' element={<Login />}/>
                         <Route path='/'
                                element={<ProfileContainer/>}/>
                         <Route path={'/profile'} element={<ProfileContainer/>}>

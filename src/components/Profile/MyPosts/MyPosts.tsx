@@ -38,7 +38,7 @@ export const MyPosts = (props: ProfilePropsType) => {
 const MyPostInputForm: React.FC<InjectedFormProps<FormInputType, {}> & {}> = (props) => {
     return <form onSubmit={props.handleSubmit}>
        <Field name={'addMyPost'} component={TextArea}
-              validate={[required, validateLength10]}
+              // validate={[required, validateLength10]}
        />
         <div>
             <button>Add post</button>

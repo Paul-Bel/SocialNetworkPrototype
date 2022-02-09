@@ -3,6 +3,8 @@ import p from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLength, required} from "../../utils/validation/validators";
+import {TextArea} from "../../utils/form/FormControl";
 
 type DialogNickType = { id: number, name: string }
 type MessageType = { id: number, message: string }
@@ -10,9 +12,11 @@ type messagePost = {
     dialogNick: DialogNickType[],
     messages: MessageType[],
     sendMessage: (value: string) => void
-    isAuth: boolean
-}
+    isAuth: boolean}
 type FormType = {addMayPost: string}
+
+const textLength100 = maxLength(100)
+
 export const Dialogs: React.FC<messagePost> = (props) => {
     const dialogsElements = () =>
         props.dialogNick.map(d => <DialogItem name={d.name} id={d.id}/>)
@@ -40,7 +44,10 @@ const AddPostForm: React.FC<InjectedFormProps<FormType>> = (props) => {
     return <>
         <form onSubmit={props.handleSubmit}>
             <div>
-            <Field name={'addMayPost'} component={"textarea"}/>
+            <Field name={'addMayPost'}
+                   component={TextArea}
+                   validate={[required, textLength100]}
+            />
             </div>
         <div>
             <button>add</button>
