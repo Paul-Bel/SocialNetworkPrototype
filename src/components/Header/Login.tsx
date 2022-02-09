@@ -1,8 +1,8 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {InputForm} from "../../utils/form/FormControl";
-import {maxLength, required} from "../../utils/validation/validators";
-import {AnyAction, Dispatch} from "redux";
+import {InputForm} from "../../common/form/FormControl";
+import {maxLength, required} from "../../common/validation/validators";
+import s from '../../common/form/FormControl.module.css'
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/rudux_Store";
 import {InitialStateAuthType, loginUser} from "../../Redux/auth-reducer";
@@ -15,7 +15,6 @@ type LoginType = {
 }
 let validateLengt30 = maxLength(30)
 const Loginform: React.FC<InjectedFormProps<LoginType>> = (props) => {
-
     return (
         <div>
             <h1> Login </h1>
@@ -26,7 +25,9 @@ const Loginform: React.FC<InjectedFormProps<LoginType>> = (props) => {
                             validate={[required, validateLengt30]}/></div>
                 <div><Field name={'rememberMe'} type={"checkbox"} component={InputForm}/>remember me</div>
                 <div>
-                    <button>Remember me</button>
+                    <button>Remember me</button> <p/>
+                    {props.error && <><div className={s.errorLogin}>{props.error}</div> </>}
+
                 </div>
             </form>
         </div>
@@ -49,4 +50,5 @@ const MapStatToAuthProps = (store: AppStateType):InitialStateAuthType => {
     return store.auth
 
 }
-export default connect(MapStatToAuthProps,{loginUser})(Login)
+
+export default connect(MapStatToAuthProps,{ loginUser })(Login)

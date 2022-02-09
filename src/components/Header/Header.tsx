@@ -11,6 +11,7 @@ type HeaderPropsType = {
         email: string | null,
     },
     isAuth: boolean,
+    logUot: () => void
 }
 
 export const Header = (props: HeaderPropsType) => {
@@ -22,8 +23,9 @@ export const Header = (props: HeaderPropsType) => {
                 ANd9GcQeCm48YLb7mh4rFyJNq202jtVys3xZlhMQNg&usqp=CAU"
                 alt=""/>
 <div className={p.nickName}>
-            {props.isAuth ? props.data.login :
-            <NavLink to={'/login'}>Login</NavLink>}
+            {props.isAuth
+                ? <><div>{props.data.login}</div><button onClick={props.logUot}>Log out</button> </>
+                : <NavLink to={'/login'}>Login</NavLink>}
 </div>
         </div>
 

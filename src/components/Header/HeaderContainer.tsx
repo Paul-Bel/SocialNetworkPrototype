@@ -13,9 +13,11 @@ class HeaderContainer extends React.Component<MapToProps> {
 
     render() {
         return (
-            this.props.isAuth
-                ? <button onClick={this.props.logUot}>Log out</button>
-                : <Header data={this.props.data} isAuth={this.props.isAuth}/>)
+            <Header
+                data={this.props.data}
+                isAuth={this.props.isAuth}
+                logUot={this.props.logUot}
+            />)
     }
 }
 

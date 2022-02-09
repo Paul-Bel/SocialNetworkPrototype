@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/rudux_Store";
 import {addDialogCreator} from "../../Redux/dialog_reducer"
 import React, {ComponentType} from "react";
-import {withRedirect} from "../hoc/withRedirect";
+import {withRedirect} from "../../common/hoc/withRedirect";
 import {compose, Dispatch } from "redux";
 
 

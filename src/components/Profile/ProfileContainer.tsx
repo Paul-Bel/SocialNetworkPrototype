@@ -10,7 +10,7 @@ import {
 } from "../../Redux/profile_reducer";
 import {connect} from "react-redux";
 import withRouter from "../../Redux/withRoute";
-import {withRedirect} from "../hoc/withRedirect";
+import {withRedirect} from "../../common/hoc/withRedirect";
 import { compose } from 'redux';
 
 

@@ -2,8 +2,8 @@ import React from 'react';
 import p from './MyPosts.module.css';
 import {Posts} from "./Post/Posts";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {maxLength, required} from "../../../utils/validation/validators";
-import {TextArea} from "../../../utils/form/FormControl";
+import {maxLength, required} from "../../../common/validation/validators";
+import {TextArea} from "../../../common/form/FormControl";
 
 type PostType = {id: number, message: string, likescounte: number,}
 

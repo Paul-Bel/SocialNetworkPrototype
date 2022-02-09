@@ -3,8 +3,8 @@ import {AppStateType} from "../../Redux/rudux_Store";
 import {UseresType, getUsers, changeFollowUser, changeUnFollowUser} from "../../Redux/user_reducer";
 import {connect} from "react-redux";
 import {Users} from "./UsersP/Users";
-import {Preloading} from "../PreLoading/Preloading";
-import {withRedirect} from "../hoc/withRedirect";
+import {Preloading} from "../../common/PreLoading/Preloading";
+import {withRedirect} from "../../common/hoc/withRedirect";
 import { compose } from "redux";
 
 export type OwnProps = {}

@@ -16,3 +16,10 @@
 .formControl.error span {
     color: red;
 }
+.errorLogin {
+    /*display: inline;*/
+    max-width: 220px;
+    color: red;
+    border: 1px solid red;
+    padding: 0 5px;
+}

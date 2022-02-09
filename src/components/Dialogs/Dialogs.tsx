@@ -3,8 +3,8 @@ import p from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {maxLength, required} from "../../utils/validation/validators";
-import {TextArea} from "../../utils/form/FormControl";
+import {maxLength, required} from "../../common/validation/validators";
+import {TextArea} from "../../common/form/FormControl";
 
 type DialogNickType = { id: number, name: string }
 type MessageType = { id: number, message: string }

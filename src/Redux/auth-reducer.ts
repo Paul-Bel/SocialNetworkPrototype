@@ -1,5 +1,11 @@
-import {Dispatch} from "redux";
+import {Dispatch, Action} from "redux";
 import {authMe} from "../api/api";
+import { ThunkAction } from 'redux-thunk'
+import {AppStateType} from "./rudux_Store";
+import {stopSubmit} from "redux-form";
+
+
+type ThunkType<TAction extends Action<any>> = ThunkAction<Promise<void>, AppStateType, unknown, TAction>
 
 export type AuthHeaderType = { type: 'AUTH_ME', action: InitialStateAuthType }
 type ActionAuthType = AuthHeaderType
@@ -44,6 +50,7 @@ export default authReducer
 
 export const checkAuth = () => {
     return (dispatch: Dispatch) => {
+
         console.log('Call chekOut')
         authMe.me()
             .then(data => {
@@ -61,18 +68,21 @@ export const setLoginUser = (id: number) => {
                 login: null,
                 email: null,
             },}}}
+
 export const loginUser = (email: string, password: string, rememberMe: boolean) =>
-    (dispatch: Dispatch) => {
+    // : ThunkType<AuthHeaderType>     =>
+   async (dispatch: Dispatch) => {
     authMe.loginMe({email, password, rememberMe})
         .then(data => {
-            console.log('After: ',data.resultCode)
+            console.log('After: ',data.messages[0])
             if(data.resultCode === 0) {
+
                 //@ts-ignore
                 dispatch(checkAuth())
-                // checkAuth()
-                console.log('checkAuth: ', data.resultCode)
+                console.log('checkAuth: ', data)
             }
-            else return
+
+            else return dispatch(stopSubmit('Login',{_error: data.messages[0]}))
         })
 }
 export const logUot = () => (dispatch: Dispatch) => {
