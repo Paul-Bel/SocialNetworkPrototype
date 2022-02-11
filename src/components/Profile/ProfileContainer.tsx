@@ -22,7 +22,7 @@ class ProfileContainer extends React.Component<MapPropsProfile
     componentDidMount() {
         let id = this.props.router.params.userId
         if (!this.props.router.params.userId) {
-            id = 21545
+            this.props.auth && this.props.profilePage.userId && (id = this.props.profilePage.userId)
         }
         this.props.setProfileAPI(id)
         this.props.getUserStatusAPI(id)
@@ -49,7 +49,7 @@ class ProfileContainer extends React.Component<MapPropsProfile
     }
 }
 
-export type MapStateProfileProps = { profilePage: ProfileType, status: string}
+export type MapStateProfileProps = { profilePage: ProfileType, status: string, auth: boolean}
 export type MapDispathToProps = {
     addPostProfile: () => void
     changePostProfile: (action: string) => void
@@ -64,6 +64,7 @@ export const MapStateProfile = (store: AppStateType): MapStateProfileProps => {
     return ({
         profilePage: store.profilePage,
         status: store.profilePage.status,
+        auth: store.auth.isAuth
     })
 }
 // let authRedirectComponent = withRedirect(ProfileContainer)

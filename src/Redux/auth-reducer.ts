@@ -50,13 +50,10 @@ export default authReducer
 
 export const checkAuth = () => {
     return (dispatch: Dispatch) => {
-
-        console.log('Call chekOut')
         authMe.me()
             .then(data => {
                 if(data.resultCode === 0)
                     dispatch(setAuthHeader({...data, isAuth: true}))
-                console.log('Ok')
             })
     }
 }

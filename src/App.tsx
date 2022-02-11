@@ -26,8 +26,8 @@ type AppDataType = {
     state: AppStateType
     dispatch: (action: ActionPropsType) => void
 }
-
-const App = (props: AppDataType) => {
+// (props: AppDataType)
+const App = () => {
 
 
     return (

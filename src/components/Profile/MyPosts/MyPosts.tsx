@@ -2,7 +2,7 @@ import React from 'react';
 import p from './MyPosts.module.css';
 import {Posts} from "./Post/Posts";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {maxLength, required} from "../../../common/validation/validators";
+import {maxLength} from "../../../common/validation/validators";
 import {TextArea} from "../../../common/form/FormControl";
 
 type PostType = {id: number, message: string, likescounte: number,}
@@ -23,10 +23,24 @@ export const MyPosts = (props: ProfilePropsType) => {
     const addMyPost = (value: FormInputType) => {
     props.addPostProfile(value.addMyPost)
     }
+    let srcPage = ''
+    // const inputTest = (e: ChangeEvent<HTMLInputElement>) => {
+    //     // e.target.files[0]
+    //     //@ts-ignore
+    //     srcPage = e.target.files[0].name
+    //     //@ts-ignore
+    //     console.log(e.target.files[0].name)
+    //     // console.log(e.target.files[0])
+    //
+    //     // console.log(typeof e.target.files)
+    // }
     return (<div>
             <h3>My post</h3>
             <div className={p.addText}>
              <PostReduxForm onSubmit={addMyPost}/>
+                {/*<div>ku-ku</div>*/}
+                {/*<input type={"file"} onChange={inputTest}/>*/}
+                {/*<div>{srcPage}<img src={srcPage} alt=""/></div>*/}
             </div>
             <div className={p.post}>
                 {postElement}
