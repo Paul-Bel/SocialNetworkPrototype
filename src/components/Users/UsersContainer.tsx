@@ -4,7 +4,6 @@ import {UseresType, getUsers, changeFollowUser, changeUnFollowUser} from "../../
 import {connect} from "react-redux";
 import {Users} from "./UsersP/Users";
 import {Preloading} from "../../common/PreLoading/Preloading";
-import {withRedirect} from "../../common/hoc/withRedirect";
 import { compose } from "redux";
 
 export type OwnProps = {}
@@ -56,5 +55,4 @@ export const UsersContainer = compose<ComponentType>(
             getUsers,
             changeFollowUser,
             changeUnFollowUser,
-        }),
-    withRedirect,)(UsersAPIContainer)
+        }),)(UsersAPIContainer)

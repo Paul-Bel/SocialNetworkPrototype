@@ -8,7 +8,6 @@ type ProfileInfoType = {profilePage: ProfileType, status: string, UpDateStatusAP
 
 export const ProfileInfo = (props: ProfileInfoType) => {
     return (
-
         <div>
             {/*<img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Istanbul_IMG_7257_1725.jpg"*/}
             {/*     alt=""/>*/}
