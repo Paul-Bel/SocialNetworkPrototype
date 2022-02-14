@@ -2,7 +2,6 @@ import React from 'react';
 import p from './Header.module.css';
 import '../../App.css'
 import {NavLink} from "react-router-dom";
-import {MapStateToProps, MapToProps} from "./HeaderContainer";
 
 type HeaderPropsType = {
     data: {

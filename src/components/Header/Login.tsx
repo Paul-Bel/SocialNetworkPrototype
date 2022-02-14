@@ -5,7 +5,7 @@ import {maxLength, required} from "../../common/validation/validators";
 import s from '../../common/form/FormControl.module.css'
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/rudux_Store";
-import {InitialStateAuthType, loginUser} from "../../Redux/auth-reducer";
+import {InitialStateAuthType, loginUser} from "../../Redux/auth_reducer";
 
 type loginUserType = { loginUser: (email: string, password: string, rememberMe: boolean, captcha: boolean) => void }
 type LoginType = {

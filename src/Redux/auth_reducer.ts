@@ -20,7 +20,6 @@ export type InitialStateAuthType = {
     "resultCode": number
     isAuth: boolean,
 }
-
 let initialStateAuth: InitialStateAuthType = {
     data: {
         id: null,
@@ -32,10 +31,7 @@ let initialStateAuth: InitialStateAuthType = {
     resultCode: 0,
     isAuth: false,
 }
-
-
-const authReducer = (state = initialStateAuth, action: ActionAuthType): InitialStateAuthType => {
-
+const auth_reducer = (state = initialStateAuth, action: ActionAuthType): InitialStateAuthType => {
     switch (action.type) {
         case'AUTH_ME': {
             return { ...action.action}
@@ -46,11 +42,11 @@ const authReducer = (state = initialStateAuth, action: ActionAuthType): InitialS
 }
 
 export const setAuthHeader = (state: InitialStateAuthType): AuthHeaderType => ({type: 'AUTH_ME', action: state})
-export default authReducer
+export default auth_reducer
 
 export const checkAuth = () => {
     return (dispatch: Dispatch) => {
-        authMe.me()
+        return authMe.me()
             .then(data => {
                 if(data.resultCode === 0)
                     dispatch(setAuthHeader({...data, isAuth: true}))
@@ -71,12 +67,9 @@ export const loginUser = (email: string, password: string, rememberMe: boolean) 
    async (dispatch: Dispatch) => {
     authMe.loginMe({email, password, rememberMe})
         .then(data => {
-            console.log('After: ',data.messages[0])
             if(data.resultCode === 0) {
-
                 //@ts-ignore
                 dispatch(checkAuth())
-                console.log('checkAuth: ', data)
             }
 
             else return dispatch(stopSubmit('Login',{_error: data.messages[0]}))
