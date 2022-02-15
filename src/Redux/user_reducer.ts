@@ -1,7 +1,6 @@
 import {UserAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {AppStateType} from "./rudux_Store";
-import axios from "axios";
 
 export type ItemsType = {
     name: string,
@@ -95,14 +94,13 @@ export const changeFollowingInProgress = (followingInProgress: number, isFetchin
 })
 
 
-export const getUsers = (currentPage: number, totalPageSize: number) => {
+export const getUsersTC = (currentPage: number, totalPageSize: number) => {
     return (dispatch: Dispatch, getState: () => AppStateType) => {
         dispatch(changeFetching(false))
         UserAPI.getUsers(currentPage+102, totalPageSize)
-            .then(respons => {
+            .then(response => {
                 dispatch(changeFetching(true))
-                dispatch(setUsers(respons, currentPage))
-                // dispatch(changePages(currentPage))
+                dispatch(setUsers(response, currentPage))
             })
     }
 }

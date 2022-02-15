@@ -1,10 +1,11 @@
 import React, {ComponentType} from "react";
 import {AppStateType} from "../../Redux/rudux_Store";
-import {UseresType, getUsers, changeFollowUser, changeUnFollowUser} from "../../Redux/user_reducer";
+import {UseresType, getUsersTC, changeFollowUser, changeUnFollowUser} from "../../Redux/user_reducer";
 import {connect} from "react-redux";
 import {Users} from "./UsersP/Users";
 import {Preloading} from "../../common/PreLoading/Preloading";
 import { compose } from "redux";
+import {getCurrentPage, getUsers} from "../../Redux/user-selectors";
 
 export type OwnProps = {}
 export type UserPropsType = MapDispatchToPropsType & MapStateToPropsType
@@ -14,10 +15,10 @@ export type MapDispatchToPropsType = {
     changeFollowUser:(id: number) => void
     changeUnFollowUser:(id: number) => void
 }
-const mapStateToProps = (store: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return ({
-        users: store.users,
-        currentPage: store.users.currentPage,
+        users: getUsers(state),
+        currentPage: getCurrentPage(state),
     })
 }
 
@@ -52,7 +53,7 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
 export const UsersContainer = compose<ComponentType>(
     connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, AppStateType>(mapStateToProps,
         {
-            getUsers,
+            getUsers: getUsersTC,
             changeFollowUser,
             changeUnFollowUser,
         }),)(UsersAPIContainer)
